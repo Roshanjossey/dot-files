@@ -2,7 +2,7 @@
 export ZSH=/home/harsh/.oh-my-zsh
 
 # zsh supporting all colors
-TERM=xterm-256color
+export TERM=xterm-256color
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
@@ -95,3 +95,5 @@ export EDITOR='vim'
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+#tmux alias
+alias tmux='tmux -u'
