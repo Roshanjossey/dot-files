@@ -2,11 +2,11 @@ let SessionLoad = 1
 if &cp | set nocp | endif
 let s:cpo_save=&cpo
 set cpo&vim
-inoremap <C-Space> 
-imap <Nul> <C-Space>
-inoremap <expr> <Up> pumvisible() ? "\" : "\<Up>"
-inoremap <expr> <S-Tab> pumvisible() ? "\" : "\<S-Tab>"
 inoremap <expr> <Down> pumvisible() ? "\" : "\<Down>"
+inoremap <expr> <S-Tab> pumvisible() ? "\" : "\<S-Tab>"
+inoremap <expr> <Up> pumvisible() ? "\" : "\<Up>"
+imap <Nul> <C-Space>
+inoremap <C-Space> 
 nnoremap  h
 nnoremap <NL> j
 nnoremap  k
@@ -156,8 +156,6 @@ set autoindent
 set autoread
 set background=dark
 set backspace=indent,eol,start
-set balloonexpr=SyntasticBalloonsExprNotifier()
-set completefunc=youcompleteme#Complete
 set completeopt=preview,menuone
 set cpoptions=aAceFsB
 set expandtab
@@ -169,8 +167,6 @@ set hlsearch
 set ignorecase
 set incsearch
 set laststatus=2
-set omnifunc=youcompleteme#OmniComplete
-set operatorfunc=<SNR>52_go
 set printoptions=paper:a4
 set ruler
 set runtimepath=~/.vim,~/.vim/bundle/vundle,~/.vim/bundle/syntastic,~/.vim/bundle/nerdtree,~/.vim/bundle/vim-colorschemes,~/.vim/bundle/YouCompleteMe,~/.vim/bundle/ctrlp.vim,~/.vim/bundle/vim-go,~/.vim/bundle/vim-commentary,~/.vim/bundle/vim-surround,~/.vim/bundle/vim-fugitive,~/.vim/bundle/vim-unimpaired,~/.vim/bundle/vim-airline,/var/lib/vim/addons,/usr/share/vim/vimfiles,/usr/share/vim/vim74,/usr/share/vim/vimfiles/after,/var/lib/vim/addons/after,~/.vim/after,~/.vim/bundle/vundle/,~/.vim/bundle/vundle/after,~/.vim/bundle/syntastic/after,~/.vim/bundle/nerdtree/after,~/.vim/bundle/vim-colorschemes/after,~/.vim/bundle/YouCompleteMe/after,~/.vim/bundle/ctrlp.vim/after,~/.vim/bundle/vim-go/after,~/.vim/bundle/vim-commentary/after,~/.vim/bundle/vim-surround/after,~/.vim/bundle/vim-fugitive/after,~/.vim/bundle/vim-unimpaired/after,~/.vim/bundle/vim-airline/after
@@ -190,30 +186,21 @@ set tabline=%!airline#extensions#tabline#get()
 set tabstop=4
 set updatetime=2000
 set virtualedit=block
-set wildignore=*.pyc
 set nowritebackup
 let s:so_save = &so | let s:siso_save = &siso | set so=0 siso=0
 let v:this_session=expand("<sfile>:p")
 silent only
-cd ~/scrapy/cameras_accessories
+cd ~/scrapy/footwears/sub_categories/sub_category
 if expand('%') == '' && !&modified && line('$') <= 1 && getline(1) == ''
   let s:wipebuf = bufnr('%')
 endif
 set shortmess=aoO
-badd +0 category_details.txt
-badd +93 spec_id/spec_id/spiders/tripod.py
-badd +1 spec_id/pipelines.py
-badd +129 cameras_accessories/spiders/snapdeal_spider.py
-badd +413 category_group_id/category_group_id/pipelines.py
-badd +85 category_group_id/category_group_id/spiders/memory_card.py
-badd +1 spec_id/spec_id/pipelines.py
-badd +62 category_group_id/category_group_id/spiders/battery.py
 silent! argdel *
-edit category_details.txt
 set splitbelow splitright
 wincmd t
 set winheight=1 winwidth=1
 argglobal
+enew
 setlocal keymap=
 setlocal noarabic
 setlocal autoindent
@@ -232,7 +219,7 @@ setlocal commentstring=/*%s*/
 setlocal complete=.,w,b,u,t,i
 setlocal concealcursor=
 setlocal conceallevel=0
-setlocal completefunc=youcompleteme#Complete
+setlocal completefunc=
 setlocal nocopyindent
 setlocal cryptmethod=
 setlocal nocursorbind
@@ -244,8 +231,8 @@ setlocal nodiff
 setlocal equalprg=
 setlocal errorformat=
 setlocal expandtab
-if &filetype != 'text'
-setlocal filetype=text
+if &filetype != ''
+setlocal filetype=
 endif
 setlocal foldcolumn=0
 setlocal foldenable
@@ -281,7 +268,7 @@ setlocal nrformats=octal,hex
 set number
 setlocal number
 setlocal numberwidth=4
-setlocal omnifunc=youcompleteme#OmniComplete
+setlocal omnifunc=
 setlocal path=
 setlocal nopreserveindent
 setlocal nopreviewwindow
@@ -303,8 +290,8 @@ setlocal statusline=%!airline#statusline(1)
 setlocal suffixesadd=
 setlocal noswapfile
 setlocal synmaxcol=3000
-if &syntax != 'text'
-setlocal syntax=text
+if &syntax != ''
+setlocal syntax=
 endif
 setlocal tabstop=4
 setlocal tags=
@@ -312,17 +299,9 @@ setlocal textwidth=0
 setlocal thesaurus=
 setlocal noundofile
 setlocal nowinfixheight
-setlocal winfixwidth
-set nowrap
+setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
-silent! normal! zE
-let s:l = 10 - ((9 * winheight(0) + 9) / 19)
-if s:l < 1 | let s:l = 1 | endif
-exe s:l
-normal! zt
-10
-normal! 085|
 tabnext 1
 if exists('s:wipebuf')
   silent exe 'bwipe ' . s:wipebuf

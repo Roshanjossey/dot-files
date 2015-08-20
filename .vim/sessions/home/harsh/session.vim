@@ -2,17 +2,22 @@ let SessionLoad = 1
 if &cp | set nocp | endif
 let s:cpo_save=&cpo
 set cpo&vim
+inoremap <silent> <C-Tab> =UltiSnips#ListSnippets()
 inoremap <expr> <Down> pumvisible() ? "\" : "\<Down>"
 inoremap <expr> <S-Tab> pumvisible() ? "\" : "\<S-Tab>"
 inoremap <expr> <Up> pumvisible() ? "\" : "\<Up>"
 imap <Nul> <C-Space>
 inoremap <C-Space> 
 map! <S-Insert> <MiddleMouse>
+snoremap <silent>  c
 nnoremap  h
+xnoremap <silent> 	 :call UltiSnips#SaveLastVisualSelection()gvs
+snoremap <silent> 	 :call UltiSnips#ExpandSnippet()
 nnoremap <NL> j
 nnoremap  k
 nnoremap  l
 nnoremap <silent>  :CtrlP
+snoremap  "_c
 nnoremap ,d :YcmShowDetailedDiagnostic
 map ,b :CtrlPBuffer
 nnoremap ,c <Plug>CommentaryLine
@@ -117,6 +122,10 @@ nmap ySs <Plug>YSsurround
 nmap yss <Plug>Yssurround
 nmap yS <Plug>YSurround
 nmap ys <Plug>Ysurround
+snoremap <silent> <Del> c
+snoremap <silent> <BS> c
+snoremap <silent> <C-Tab> :call UltiSnips#ListSnippets()
+map <S-Insert> <MiddleMouse>
 nnoremap <silent> <Plug>NetrwBrowseX :call netrw#NetrwBrowseX(expand("<cWORD>"),0)
 nmap <silent> <Plug>unimpairedOPrevious <Plug>unimpairedDirectoryPrevious:echohl WarningMSG|echo "[o is deprecated. Use [f"|echohl NONE
 nmap <silent> <Plug>unimpairedONext <Plug>unimpairedDirectoryNext:echohl WarningMSG|echo "]o is deprecated. Use ]f"|echohl NONE
@@ -146,10 +155,9 @@ nnoremap <silent> <Plug>unimpairedANext :exe "".(v:count ? v:count : "")."next
 nnoremap <silent> <Plug>unimpairedAPrevious :exe "".(v:count ? v:count : "")."previous"
 nnoremap <silent> <Plug>SurroundRepeat .
 nmap <silent> <Plug>CommentaryUndo <Plug>Commentary<Plug>Commentary
-map <S-Insert> <MiddleMouse>
 imap S <Plug>ISurround
 imap s <Plug>Isurround
-inoremap <expr> 	 pumvisible() ? "\" : "\	"
+inoremap <silent> 	 =UltiSnips#ExpandSnippet()
 imap  <Plug>Isurround
 inoremap jk 
 let &cpo=s:cpo_save
@@ -169,6 +177,7 @@ set helplang=en
 set hidden
 set hlsearch
 set ignorecase
+set imsearch=0
 set incsearch
 set laststatus=2
 set nomodeline
@@ -176,7 +185,7 @@ set mouse=a
 set operatorfunc=<SNR>52_go
 set printoptions=paper:a4
 set ruler
-set runtimepath=~/.vim,~/.vim/bundle/vundle,~/.vim/bundle/syntastic,~/.vim/bundle/nerdtree,~/.vim/bundle/vim-colorschemes,~/.vim/bundle/YouCompleteMe,~/.vim/bundle/ctrlp.vim,~/.vim/bundle/vim-go,~/.vim/bundle/vim-commentary,~/.vim/bundle/vim-surround,~/.vim/bundle/vim-fugitive,~/.vim/bundle/vim-unimpaired,~/.vim/bundle/vim-airline,/var/lib/vim/addons,/usr/share/vim/vimfiles,/usr/share/vim/vim74,/usr/share/vim/vimfiles/after,/var/lib/vim/addons/after,~/.vim/after,~/.vim/bundle/vundle/,~/.vim/bundle/vundle/after,~/.vim/bundle/syntastic/after,~/.vim/bundle/nerdtree/after,~/.vim/bundle/vim-colorschemes/after,~/.vim/bundle/YouCompleteMe/after,~/.vim/bundle/ctrlp.vim/after,~/.vim/bundle/vim-go/after,~/.vim/bundle/vim-commentary/after,~/.vim/bundle/vim-surround/after,~/.vim/bundle/vim-fugitive/after,~/.vim/bundle/vim-unimpaired/after,~/.vim/bundle/vim-airline/after
+set runtimepath=~/.vim,~/.vim/bundle/vim-snippets,~/.vim/bundle/ultisnips,~/.vim/bundle/vim-flake8,~/.vim/bundle/ropevim,~/.vim/bundle/vundle,~/.vim/bundle/syntastic,~/.vim/bundle/nerdtree,~/.vim/bundle/vim-colorschemes,~/.vim/bundle/YouCompleteMe,~/.vim/bundle/ctrlp.vim,~/.vim/bundle/vim-go,~/.vim/bundle/vim-commentary,~/.vim/bundle/vim-surround,~/.vim/bundle/vim-fugitive,~/.vim/bundle/vim-unimpaired,~/.vim/bundle/vim-airline,/var/lib/vim/addons,/usr/share/vim/vimfiles,/usr/share/vim/vim74,/usr/share/vim/vimfiles/after,/var/lib/vim/addons/after,~/.vim/after,~/.vim/bundle/vundle/,~/.vim/bundle/vundle/after,~/.vim/bundle/syntastic/after,~/.vim/bundle/nerdtree/after,~/.vim/bundle/vim-colorschemes/after,~/.vim/bundle/YouCompleteMe/after,~/.vim/bundle/ctrlp.vim/after,~/.vim/bundle/vim-go/after,~/.vim/bundle/vim-commentary/after,~/.vim/bundle/vim-surround/after,~/.vim/bundle/vim-fugitive/after,~/.vim/bundle/vim-unimpaired/after,~/.vim/bundle/vim-airline/after,~/.vim/bundle/ropevim/after,~/.vim/bundle/vim-flake8/after,~/.vim/bundle/ultisnips/after,~/.vim/bundle/vim-snippets/after
 set shiftround
 set shiftwidth=4
 set showmatch
@@ -204,17 +213,29 @@ if expand('%') == '' && !&modified && line('$') <= 1 && getline(1) == ''
   let s:wipebuf = bufnr('%')
 endif
 set shortmess=aoO
-badd +1 Downloads/fashion_code/pushpi/mens\ fashion/menssubcategory_shirts/menssubcategory_shirts/spiders/flipkart_spider.py
-badd +8 .zshrc
-badd +1 .vim/bundle/vim-colorschemes/colors/molokai-dark.vim
-badd +2 .vimrc
-badd +74 .bashrc
+badd +98 .zshrc
+badd +42 .tmux.conf
+badd +215 .vimrc
+badd +100 .bashrc
+badd +12 .tmux.conf.backup
 args .vimrc
-edit Downloads/fashion_code/pushpi/mens\ fashion/menssubcategory_shirts/menssubcategory_shirts/spiders/flipkart_spider.py
+edit .vimrc
 set splitbelow splitright
 wincmd t
 set winheight=1 winwidth=1
 argglobal
+vnoremap <buffer> <silent> [" :exe "normal! gv"|call search('\%(^\s*".*\n\)\%(^\s*"\)\@!', "bW")
+nnoremap <buffer> <silent> [" :call search('\%(^\s*".*\n\)\%(^\s*"\)\@!', "bW")
+vnoremap <buffer> <silent> [] m':exe "normal! gv"|call search('^\s*endf*\%[unction]\>', "bW")
+nnoremap <buffer> <silent> [] m':call search('^\s*endf*\%[unction]\>', "bW")
+vnoremap <buffer> <silent> [[ m':exe "normal! gv"|call search('^\s*fu\%[nction]\>', "bW")
+nnoremap <buffer> <silent> [[ m':call search('^\s*fu\%[nction]\>', "bW")
+vnoremap <buffer> <silent> ]" :exe "normal! gv"|call search('^\(\s*".*\n\)\@<!\(\s*"\)', "W")
+nnoremap <buffer> <silent> ]" :call search('^\(\s*".*\n\)\@<!\(\s*"\)', "W")
+vnoremap <buffer> <silent> ][ m':exe "normal! gv"|call search('^\s*endf*\%[unction]\>', "W")
+nnoremap <buffer> <silent> ][ m':call search('^\s*endf*\%[unction]\>', "W")
+vnoremap <buffer> <silent> ]] m':exe "normal! gv"|call search('^\s*fu\%[nction]\>', "W")
+nnoremap <buffer> <silent> ]] m':call search('^\s*fu\%[nction]\>', "W")
 setlocal keymap=
 setlocal noarabic
 setlocal autoindent
@@ -224,12 +245,12 @@ setlocal bufhidden=
 setlocal buflisted
 setlocal buftype=
 setlocal nocindent
-setlocal cinkeys=0{,0},0),:,!^F,o,O,e
+setlocal cinkeys=0{,0},0),:,0#,!^F,o,O,e
 setlocal cinoptions=
 setlocal cinwords=if,else,while,do,for,switch
 setlocal colorcolumn=
-setlocal comments=s1:/*,mb:*,ex:*/,://,b:#,:XCOMM,n:>,fb:-
-setlocal commentstring=#%s
+setlocal comments=sO:\"\ -,mO:\"\ \ ,eO:\"\",:\"
+setlocal commentstring=\"%s
 setlocal complete=.,w,b,u,t,i
 setlocal concealcursor=
 setlocal conceallevel=0
@@ -245,32 +266,34 @@ setlocal nodiff
 setlocal equalprg=
 setlocal errorformat=
 setlocal expandtab
-if &filetype != 'python'
-setlocal filetype=python
+if &filetype != 'vim'
+setlocal filetype=vim
 endif
 setlocal foldcolumn=0
 setlocal foldenable
 setlocal foldexpr=0
 setlocal foldignore=#
+set foldlevel=99
 setlocal foldlevel=0
 setlocal foldmarker={{{,}}}
+set foldmethod=indent
 setlocal foldmethod=manual
 setlocal foldminlines=1
 setlocal foldnestmax=20
 setlocal foldtext=foldtext()
 setlocal formatexpr=
-setlocal formatoptions=tcq
+setlocal formatoptions=croql
 setlocal formatlistpat=^\\s*\\d\\+[\\]:.)}\\t\ ]\\s*
 setlocal grepprg=
 setlocal iminsert=2
 setlocal imsearch=0
-setlocal include=^\\s*\\(from\\|import\\)
-setlocal includeexpr=substitute(v:fname,'\\.','/','g')
-setlocal indentexpr=GetPythonIndent(v:lnum)
-setlocal indentkeys=0{,0},:,!^F,o,O,e,<:>,=elif,=except
+setlocal include=
+setlocal includeexpr=
+setlocal indentexpr=GetVimIndent()
+setlocal indentkeys=0{,0},:,0#,!^F,o,O,e,=end,=else,=cat,=fina,=END,0\\
 setlocal noinfercase
-setlocal iskeyword=@,48-57,_,192-255
-setlocal keywordprg=pydoc
+setlocal iskeyword=@,48-57,_,192-255,#
+setlocal keywordprg=
 setlocal nolinebreak
 setlocal nolisp
 setlocal nolist
@@ -282,7 +305,7 @@ setlocal nrformats=octal,hex
 set number
 setlocal number
 setlocal numberwidth=4
-setlocal omnifunc=pythoncomplete#Complete
+setlocal omnifunc=
 setlocal path=
 setlocal nopreserveindent
 setlocal nopreviewwindow
@@ -301,15 +324,15 @@ setlocal spellcapcheck=[.?!]\\_[\\])'\"\	\ ]\\+
 setlocal spellfile=
 setlocal spelllang=en
 setlocal statusline=%!airline#statusline(1)
-setlocal suffixesadd=.py
+setlocal suffixesadd=
 setlocal noswapfile
 setlocal synmaxcol=3000
-if &syntax != 'python'
-setlocal syntax=python
+if &syntax != 'vim'
+setlocal syntax=vim
 endif
 setlocal tabstop=4
 setlocal tags=
-setlocal textwidth=0
+setlocal textwidth=78
 setlocal thesaurus=
 setlocal noundofile
 setlocal nowinfixheight
@@ -317,12 +340,12 @@ setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
 silent! normal! zE
-let s:l = 39 - ((19 * winheight(0) + 10) / 21)
+let s:l = 10 - ((9 * winheight(0) + 19) / 38)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-39
-normal! 022|
+10
+normal! 0
 tabnext 1
 if exists('s:wipebuf')
   silent exe 'bwipe ' . s:wipebuf

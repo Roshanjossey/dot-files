@@ -37,6 +37,14 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-unimpaired'
 " That cool status bar I've been seeing
 Plugin 'bling/vim-airline'
+" rope library to provide features like python refactorings and code-assists 
+Plugin 'python-rope/ropevim'
+" Flake8 plugin for Vim 
+Plugin 'nvie/vim-flake8'
+" Track the engine.
+Plugin 'SirVer/ultisnips'
+" Snippets are separated from the engine. Add this if you want them:
+Plugin 'honza/vim-snippets'
 " All of your Plugins must be added before the following line
 call vundle#end() 
  
@@ -54,7 +62,7 @@ set shiftround " tab / shifting moves to closest tabstop.
 set autoindent " Match indents on new lines.
 set smartindent " Intellegently dedent / indent new lines based on rules.
 set number " Turn on line numbers 
-set background=dark " background
+" set background=dark " background
 set t_Co=256 " 256 color on terminal
 " We have VCS -- we don't need this stuff.
 set nobackup " We have vcs, we don't need backups.
@@ -79,6 +87,10 @@ set virtualedit+=block
 " leader is a key that allows you to have your own "namespace" of keybindings.
 " You'll see it a lot below as <leader>
 let mapleader = ","
+
+"Folding
+set foldmethod=indent
+set foldlevel=99
  
  
 " So we don't have to press shift when we want to get into command mode.
@@ -98,6 +110,10 @@ noremap <leader><space> :noh<cr>:call clearmatches()<cr>
 " Quick buffer switching - like cmd-tab'ing
 nnoremap <leader><leader> <c-^>
  
+"Fixing problem of tmux interfering with background
+if exists('$TMUX')
+  set term=screen-256color
+endif
  
 " Visual line nav, not real line nav
 " If you wrap lines, vim by default won't let you move down one line to the
@@ -189,6 +205,14 @@ au FileType go nmap <leader>c <Plug>(go-coverage)
 au FileType go nmap <Leader>gd <Plug>(go-doc)
 au FileType go nmap <Leader>gv <Plug>(go-doc-vertical)
 
+"---------------------------snippets------------------------------------------
+" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+
+" If you want :UltiSnipsEdit to split your window.
+let g:UltiSnipsEditSplit="vertical"
 "---------------------------colorscheme----------------------------------------
 
 colorscheme molokai

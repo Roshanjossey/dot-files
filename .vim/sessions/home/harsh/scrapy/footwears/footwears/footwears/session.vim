@@ -169,7 +169,7 @@ set ignorecase
 set incsearch
 set laststatus=2
 set omnifunc=youcompleteme#OmniComplete
-set operatorfunc=<SNR>53_opfunc
+set operatorfunc=<SNR>52_go
 set printoptions=paper:a4
 set ruler
 set runtimepath=~/.vim,~/.vim/bundle/vundle,~/.vim/bundle/syntastic,~/.vim/bundle/nerdtree,~/.vim/bundle/vim-colorschemes,~/.vim/bundle/YouCompleteMe,~/.vim/bundle/ctrlp.vim,~/.vim/bundle/vim-go,~/.vim/bundle/vim-commentary,~/.vim/bundle/vim-surround,~/.vim/bundle/vim-fugitive,~/.vim/bundle/vim-unimpaired,~/.vim/bundle/vim-airline,/var/lib/vim/addons,/usr/share/vim/vimfiles,/usr/share/vim/vim74,/usr/share/vim/vimfiles/after,/var/lib/vim/addons/after,~/.vim/after,~/.vim/bundle/vundle/,~/.vim/bundle/vundle/after,~/.vim/bundle/syntastic/after,~/.vim/bundle/nerdtree/after,~/.vim/bundle/vim-colorschemes/after,~/.vim/bundle/YouCompleteMe/after,~/.vim/bundle/ctrlp.vim/after,~/.vim/bundle/vim-go/after,~/.vim/bundle/vim-commentary/after,~/.vim/bundle/vim-surround/after,~/.vim/bundle/vim-fugitive/after,~/.vim/bundle/vim-unimpaired/after,~/.vim/bundle/vim-airline/after
@@ -199,16 +199,15 @@ if expand('%') == '' && !&modified && line('$') <= 1 && getline(1) == ''
   let s:wipebuf = bufnr('%')
 endif
 set shortmess=aoO
-badd +44 spiders/flipkart_spider.py
-badd +26 pipelines.py
-badd +39 spiders/snapdeal.py
-badd +11 items.py
 badd +109 spiders/jabong_spider.py
 badd +8 spiders/infibeam.py
-badd +64 spiders/amazon.py
-badd +25 spiders/koovs.py
+badd +38 spiders/amazon.py
+badd +33 spiders/koovs.py
+badd +90 spiders/paytm_spider.py
+badd +84 spiders/fashionara.py
+badd +133 spiders/homeshop18.py
 silent! argdel *
-edit spiders/koovs.py
+edit spiders/fashionara.py
 set splitbelow splitright
 wincmd t
 set winheight=1 winwidth=1
@@ -280,7 +279,7 @@ setlocal nrformats=octal,hex
 set number
 setlocal number
 setlocal numberwidth=4
-setlocal omnifunc=youcompleteme#OmniComplete
+setlocal omnifunc=pythoncomplete#Complete
 setlocal path=
 setlocal nopreserveindent
 setlocal nopreviewwindow
@@ -315,12 +314,12 @@ setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
 silent! normal! zE
-let s:l = 90 - ((38 * winheight(0) + 19) / 39)
+let s:l = 84 - ((18 * winheight(0) + 19) / 39)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-90
-normal! 08|
+84
+normal! 0
 tabnext 1
 if exists('s:wipebuf')
   silent exe 'bwipe ' . s:wipebuf

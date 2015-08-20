@@ -2,11 +2,11 @@ let SessionLoad = 1
 if &cp | set nocp | endif
 let s:cpo_save=&cpo
 set cpo&vim
-inoremap <C-Space> 
-imap <Nul> <C-Space>
-inoremap <expr> <Up> pumvisible() ? "\" : "\<Up>"
-inoremap <expr> <S-Tab> pumvisible() ? "\" : "\<S-Tab>"
 inoremap <expr> <Down> pumvisible() ? "\" : "\<Down>"
+inoremap <expr> <S-Tab> pumvisible() ? "\" : "\<S-Tab>"
+inoremap <expr> <Up> pumvisible() ? "\" : "\<Up>"
+imap <Nul> <C-Space>
+inoremap <C-Space> 
 nnoremap  h
 nnoremap <NL> j
 nnoremap  k
@@ -159,7 +159,6 @@ set backspace=indent,eol,start
 set balloonexpr=SyntasticBalloonsExprNotifier()
 set completefunc=youcompleteme#Complete
 set completeopt=preview,menuone
-set cpoptions=aAceFsB
 set expandtab
 set fileencodings=ucs-bom,utf-8,default,latin1
 set gdefault
@@ -195,21 +194,17 @@ set nowritebackup
 let s:so_save = &so | let s:siso_save = &siso | set so=0 siso=0
 let v:this_session=expand("<sfile>:p")
 silent only
-cd ~/scrapy/cameras_accessories
+cd ~/scrapy/footwears/sub_categories/sub_category/sub_category
 if expand('%') == '' && !&modified && line('$') <= 1 && getline(1) == ''
   let s:wipebuf = bufnr('%')
 endif
 set shortmess=aoO
-badd +0 category_details.txt
-badd +93 spec_id/spec_id/spiders/tripod.py
-badd +1 spec_id/pipelines.py
-badd +129 cameras_accessories/spiders/snapdeal_spider.py
-badd +413 category_group_id/category_group_id/pipelines.py
-badd +85 category_group_id/category_group_id/spiders/memory_card.py
-badd +1 spec_id/spec_id/pipelines.py
-badd +62 category_group_id/category_group_id/spiders/battery.py
+badd +21 pipelines.py
+badd +5 spiders/shopclues_sub.py
+badd +1 spiders/snapdeal_sub.py
+badd +135 spiders/yepme_sub.py
 silent! argdel *
-edit category_details.txt
+edit pipelines.py
 set splitbelow splitright
 wincmd t
 set winheight=1 winwidth=1
@@ -223,12 +218,12 @@ setlocal bufhidden=
 setlocal buflisted
 setlocal buftype=
 setlocal nocindent
-setlocal cinkeys=0{,0},0),:,0#,!^F,o,O,e
+setlocal cinkeys=0{,0},0),:,!^F,o,O,e
 setlocal cinoptions=
 setlocal cinwords=if,else,while,do,for,switch
 setlocal colorcolumn=
-setlocal comments=s1:/*,mb:*,ex:*/,://,b:#,:%,:XCOMM,n:>,fb:-
-setlocal commentstring=/*%s*/
+setlocal comments=s1:/*,mb:*,ex:*/,://,b:#,:XCOMM,n:>,fb:-
+setlocal commentstring=#%s
 setlocal complete=.,w,b,u,t,i
 setlocal concealcursor=
 setlocal conceallevel=0
@@ -244,8 +239,8 @@ setlocal nodiff
 setlocal equalprg=
 setlocal errorformat=
 setlocal expandtab
-if &filetype != 'text'
-setlocal filetype=text
+if &filetype != 'python'
+setlocal filetype=python
 endif
 setlocal foldcolumn=0
 setlocal foldenable
@@ -263,13 +258,13 @@ setlocal formatlistpat=^\\s*\\d\\+[\\]:.)}\\t\ ]\\s*
 setlocal grepprg=
 setlocal iminsert=2
 setlocal imsearch=2
-setlocal include=
-setlocal includeexpr=
-setlocal indentexpr=
-setlocal indentkeys=0{,0},:,0#,!^F,o,O,e
+setlocal include=^\\s*\\(from\\|import\\)
+setlocal includeexpr=substitute(v:fname,'\\.','/','g')
+setlocal indentexpr=GetPythonIndent(v:lnum)
+setlocal indentkeys=0{,0},:,!^F,o,O,e,<:>,=elif,=except
 setlocal noinfercase
 setlocal iskeyword=@,48-57,_,192-255
-setlocal keywordprg=
+setlocal keywordprg=pydoc
 setlocal nolinebreak
 setlocal nolisp
 setlocal nolist
@@ -281,7 +276,7 @@ setlocal nrformats=octal,hex
 set number
 setlocal number
 setlocal numberwidth=4
-setlocal omnifunc=youcompleteme#OmniComplete
+setlocal omnifunc=pythoncomplete#Complete
 setlocal path=
 setlocal nopreserveindent
 setlocal nopreviewwindow
@@ -300,29 +295,28 @@ setlocal spellcapcheck=[.?!]\\_[\\])'\"\	\ ]\\+
 setlocal spellfile=
 setlocal spelllang=en
 setlocal statusline=%!airline#statusline(1)
-setlocal suffixesadd=
+setlocal suffixesadd=.py
 setlocal noswapfile
 setlocal synmaxcol=3000
-if &syntax != 'text'
-setlocal syntax=text
+if &syntax != 'python'
+setlocal syntax=python
 endif
-setlocal tabstop=4
+setlocal tabstop=8
 setlocal tags=
 setlocal textwidth=0
 setlocal thesaurus=
 setlocal noundofile
 setlocal nowinfixheight
-setlocal winfixwidth
-set nowrap
+setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
 silent! normal! zE
-let s:l = 10 - ((9 * winheight(0) + 9) / 19)
+let s:l = 21 - ((20 * winheight(0) + 19) / 39)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-10
-normal! 085|
+21
+normal! 0
 tabnext 1
 if exists('s:wipebuf')
   silent exe 'bwipe ' . s:wipebuf

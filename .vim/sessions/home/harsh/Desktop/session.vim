@@ -2,19 +2,25 @@ let SessionLoad = 1
 if &cp | set nocp | endif
 let s:cpo_save=&cpo
 set cpo&vim
-inoremap <C-Space> 
-imap <Nul> <C-Space>
-inoremap <expr> <Up> pumvisible() ? "\" : "\<Up>"
-inoremap <expr> <S-Tab> pumvisible() ? "\" : "\<S-Tab>"
 inoremap <expr> <Down> pumvisible() ? "\" : "\<Down>"
+inoremap <expr> <S-Tab> pumvisible() ? "\" : "\<S-Tab>"
+inoremap <expr> <Up> pumvisible() ? "\" : "\<Up>"
+imap <Nul> <C-Space>
+inoremap <C-Space> 
 nnoremap  h
 nnoremap <NL> j
 nnoremap  k
 nnoremap  l
 nnoremap <silent>  :CtrlP
+vmap ,b :CtrlPBuffer
 nnoremap ,d :YcmShowDetailedDiagnostic
-map ,b :CtrlPBuffer
-nnoremap ,c <Plug>CommentaryLine
+nmap ,r <Plug>(go-run)
+nmap ,b <Plug>(go-build)
+nmap ,t <Plug>(go-test)
+nmap ,gd <Plug>(go-doc)
+nmap ,gv <Plug>(go-doc-vertical)
+omap ,b :CtrlPBuffer
+nmap ,c <Plug>(go-coverage)
 noremap ,s s
 noremap ,v v
 nnoremap ,, 
@@ -116,6 +122,37 @@ nmap ySs <Plug>YSsurround
 nmap yss <Plug>Yssurround
 nmap yS <Plug>YSurround
 nmap ys <Plug>Ysurround
+nnoremap <silent> <Plug>(go-run) :call go#cmd#Run(!g:go_jump_to_error,expand('%'))
+nnoremap <silent> <Plug>(go-build) :call go#cmd#Build(!g:go_jump_to_error,'')
+nnoremap <silent> <Plug>(go-generate) :call go#cmd#Generate(!g:go_jump_to_error,'')
+nnoremap <silent> <Plug>(go-install) :call go#cmd#Install(!g:go_jump_to_error)
+nnoremap <silent> <Plug>(go-test) :call go#cmd#Test(!g:go_jump_to_error, 0, '')
+nnoremap <silent> <Plug>(go-test-func) :call go#cmd#TestFunc(!g:go_jump_to_error, '')
+nnoremap <silent> <Plug>(go-test-compile) :call go#cmd#Test(!g:go_jump_to_error, 1, '')
+nnoremap <silent> <Plug>(go-coverage) :call go#cmd#Coverage(!g:go_jump_to_error, '')
+nnoremap <silent> <Plug>(go-vet) :call go#cmd#Vet(!g:go_jump_to_error)
+nnoremap <silent> <Plug>(go-files) :call go#tool#Files()
+nnoremap <silent> <Plug>(go-deps) :call go#tool#Deps()
+nnoremap <silent> <Plug>(go-info) :call go#complete#Info()
+nnoremap <silent> <Plug>(go-import) :call go#import#SwitchImport(1, '', expand('<cword>'))
+nnoremap <silent> <Plug>(go-implements) :call go#oracle#Implements(-1)
+nnoremap <silent> <Plug>(go-callees) :call go#oracle#Callees(-1)
+nnoremap <silent> <Plug>(go-callers) :call go#oracle#Callers(-1)
+nnoremap <silent> <Plug>(go-describe) :call go#oracle#Describe(-1)
+nnoremap <silent> <Plug>(go-callstack) :call go#oracle#Callstack(-1)
+nnoremap <silent> <Plug>(go-freevars) :call go#oracle#Freevars(-1)
+nnoremap <silent> <Plug>(go-channelpeers) :call go#oracle#ChannelPeers(-1)
+nnoremap <silent> <Plug>(go-referrers) :call go#oracle#Referrers(-1)
+nnoremap <silent> <Plug>(go-rename) :call go#rename#Rename()
+nnoremap <silent> <Plug>(go-def) :call go#def#Jump()
+nnoremap <silent> <Plug>(go-def-vertical) :call go#def#JumpMode("vsplit")
+nnoremap <silent> <Plug>(go-def-split) :call go#def#JumpMode("split")
+nnoremap <silent> <Plug>(go-def-tab) :call go#def#JumpMode("tab")
+nnoremap <silent> <Plug>(go-doc) :call go#doc#Open("new", "split")
+nnoremap <silent> <Plug>(go-doc-tab) :call go#doc#Open("tabnew", "tabe")
+nnoremap <silent> <Plug>(go-doc-vertical) :call go#doc#Open("vnew", "vsplit")
+nnoremap <silent> <Plug>(go-doc-split) :call go#doc#Open("new", "split")
+nnoremap <silent> <Plug>(go-doc-browser) :call go#doc#OpenBrowser()
 nnoremap <silent> <Plug>NetrwBrowseX :call netrw#NetrwBrowseX(expand("<cWORD>"),0)
 nmap <silent> <Plug>unimpairedOPrevious <Plug>unimpairedDirectoryPrevious:echohl WarningMSG|echo "[o is deprecated. Use [f"|echohl NONE
 nmap <silent> <Plug>unimpairedONext <Plug>unimpairedDirectoryNext:echohl WarningMSG|echo "]o is deprecated. Use ]f"|echohl NONE
@@ -156,7 +193,6 @@ set autoindent
 set autoread
 set background=dark
 set backspace=indent,eol,start
-set balloonexpr=SyntasticBalloonsExprNotifier()
 set completefunc=youcompleteme#Complete
 set completeopt=preview,menuone
 set cpoptions=aAceFsB
@@ -169,8 +205,6 @@ set hlsearch
 set ignorecase
 set incsearch
 set laststatus=2
-set omnifunc=youcompleteme#OmniComplete
-set operatorfunc=<SNR>52_go
 set printoptions=paper:a4
 set ruler
 set runtimepath=~/.vim,~/.vim/bundle/vundle,~/.vim/bundle/syntastic,~/.vim/bundle/nerdtree,~/.vim/bundle/vim-colorschemes,~/.vim/bundle/YouCompleteMe,~/.vim/bundle/ctrlp.vim,~/.vim/bundle/vim-go,~/.vim/bundle/vim-commentary,~/.vim/bundle/vim-surround,~/.vim/bundle/vim-fugitive,~/.vim/bundle/vim-unimpaired,~/.vim/bundle/vim-airline,/var/lib/vim/addons,/usr/share/vim/vimfiles,/usr/share/vim/vim74,/usr/share/vim/vimfiles/after,/var/lib/vim/addons/after,~/.vim/after,~/.vim/bundle/vundle/,~/.vim/bundle/vundle/after,~/.vim/bundle/syntastic/after,~/.vim/bundle/nerdtree/after,~/.vim/bundle/vim-colorschemes/after,~/.vim/bundle/YouCompleteMe/after,~/.vim/bundle/ctrlp.vim/after,~/.vim/bundle/vim-go/after,~/.vim/bundle/vim-commentary/after,~/.vim/bundle/vim-surround/after,~/.vim/bundle/vim-fugitive/after,~/.vim/bundle/vim-unimpaired/after,~/.vim/bundle/vim-airline/after
@@ -190,30 +224,28 @@ set tabline=%!airline#extensions#tabline#get()
 set tabstop=4
 set updatetime=2000
 set virtualedit=block
-set wildignore=*.pyc
 set nowritebackup
 let s:so_save = &so | let s:siso_save = &siso | set so=0 siso=0
 let v:this_session=expand("<sfile>:p")
 silent only
-cd ~/scrapy/cameras_accessories
+cd ~/Desktop
 if expand('%') == '' && !&modified && line('$') <= 1 && getline(1) == ''
   let s:wipebuf = bufnr('%')
 endif
 set shortmess=aoO
-badd +0 category_details.txt
-badd +93 spec_id/spec_id/spiders/tripod.py
-badd +1 spec_id/pipelines.py
-badd +129 cameras_accessories/spiders/snapdeal_spider.py
-badd +413 category_group_id/category_group_id/pipelines.py
-badd +85 category_group_id/category_group_id/spiders/memory_card.py
-badd +1 spec_id/spec_id/pipelines.py
-badd +62 category_group_id/category_group_id/spiders/battery.py
+badd +1 ~/go/src/learning\ go/array.go
 silent! argdel *
-edit category_details.txt
+edit ~/go/src/learning\ go/array.go
 set splitbelow splitright
 wincmd t
 set winheight=1 winwidth=1
 argglobal
+nnoremap <buffer> <silent> K :GoDoc
+xnoremap <buffer> af :call go#textobj#Function('a')
+onoremap <buffer> af :call go#textobj#Function('a')
+nnoremap <buffer> <silent> gd :GoDef
+xnoremap <buffer> if :call go#textobj#Function('i')
+onoremap <buffer> if :call go#textobj#Function('i')
 setlocal keymap=
 setlocal noarabic
 setlocal autoindent
@@ -227,8 +259,8 @@ setlocal cinkeys=0{,0},0),:,0#,!^F,o,O,e
 setlocal cinoptions=
 setlocal cinwords=if,else,while,do,for,switch
 setlocal colorcolumn=
-setlocal comments=s1:/*,mb:*,ex:*/,://,b:#,:%,:XCOMM,n:>,fb:-
-setlocal commentstring=/*%s*/
+setlocal comments=s1:/*,mb:*,ex:*/,://
+setlocal commentstring=//\ %s
 setlocal complete=.,w,b,u,t,i
 setlocal concealcursor=
 setlocal conceallevel=0
@@ -242,10 +274,10 @@ setlocal define=
 setlocal dictionary=
 setlocal nodiff
 setlocal equalprg=
-setlocal errorformat=
-setlocal expandtab
-if &filetype != 'text'
-setlocal filetype=text
+setlocal errorformat=%-G#\ %.%#,%-G%.%#panic:\ %m,%Ecan't\ load\ package:\ %m,%A%f:%l:%c:\ %m,%A%f:%l:\ %m,%C%*\\s%m,%-G%.%#
+setlocal noexpandtab
+if &filetype != 'go'
+setlocal filetype=go
 endif
 setlocal foldcolumn=0
 setlocal foldenable
@@ -258,22 +290,22 @@ setlocal foldminlines=1
 setlocal foldnestmax=20
 setlocal foldtext=foldtext()
 setlocal formatexpr=
-setlocal formatoptions=tcq
+setlocal formatoptions=cq
 setlocal formatlistpat=^\\s*\\d\\+[\\]:.)}\\t\ ]\\s*
 setlocal grepprg=
 setlocal iminsert=2
 setlocal imsearch=2
 setlocal include=
 setlocal includeexpr=
-setlocal indentexpr=
-setlocal indentkeys=0{,0},:,0#,!^F,o,O,e
+setlocal indentexpr=GoIndent(v:lnum)
+setlocal indentkeys=0{,0},:,0#,!^F,o,O,e,<:>,0=},0=)
 setlocal noinfercase
 setlocal iskeyword=@,48-57,_,192-255
 setlocal keywordprg=
 setlocal nolinebreak
 setlocal nolisp
 setlocal nolist
-setlocal makeprg=
+setlocal makeprg=go\ build
 setlocal matchpairs=(:),{:},[:]
 setlocal modeline
 setlocal modifiable
@@ -281,7 +313,7 @@ setlocal nrformats=octal,hex
 set number
 setlocal number
 setlocal numberwidth=4
-setlocal omnifunc=youcompleteme#OmniComplete
+setlocal omnifunc=go#complete#Complete
 setlocal path=
 setlocal nopreserveindent
 setlocal nopreviewwindow
@@ -303,8 +335,8 @@ setlocal statusline=%!airline#statusline(1)
 setlocal suffixesadd=
 setlocal noswapfile
 setlocal synmaxcol=3000
-if &syntax != 'text'
-setlocal syntax=text
+if &syntax != 'go'
+setlocal syntax=go
 endif
 setlocal tabstop=4
 setlocal tags=
@@ -313,16 +345,15 @@ setlocal thesaurus=
 setlocal noundofile
 setlocal nowinfixheight
 setlocal winfixwidth
-set nowrap
 setlocal wrap
 setlocal wrapmargin=0
 silent! normal! zE
-let s:l = 10 - ((9 * winheight(0) + 9) / 19)
+let s:l = 1 - ((0 * winheight(0) + 19) / 38)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-10
-normal! 085|
+1
+normal! 0
 tabnext 1
 if exists('s:wipebuf')
   silent exe 'bwipe ' . s:wipebuf
