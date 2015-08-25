@@ -37,12 +37,10 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-unimpaired'
 " That cool status bar I've been seeing
 Plugin 'bling/vim-airline'
-" rope library to provide features like python refactorings and code-assists 
-Plugin 'python-rope/ropevim'
+" Vim python-mode. PyLint, Rope, Pydoc, breakpoints from box. 
+Plugin 'klen/python-mode', { 'for': ['python'] }
 " Flake8 plugin for Vim 
 Plugin 'nvie/vim-flake8'
-" Track the engine.
-Plugin 'SirVer/ultisnips'
 " Snippets are separated from the engine. Add this if you want them:
 Plugin 'honza/vim-snippets'
 " All of your Plugins must be added before the following line

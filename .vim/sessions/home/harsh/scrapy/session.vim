@@ -238,8 +238,10 @@ setlocal foldcolumn=0
 setlocal foldenable
 setlocal foldexpr=0
 setlocal foldignore=#
+set foldlevel=99
 setlocal foldlevel=0
 setlocal foldmarker={{{,}}}
+set foldmethod=indent
 setlocal foldmethod=manual
 setlocal foldminlines=1
 setlocal foldnestmax=20
