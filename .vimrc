@@ -4,8 +4,6 @@ filetype off
 "                              Plugins
 "
 "------------------------------------------------------------------------------
-"set rtp+=~/.vim/bundle/Vundle.vim
-"call vundle#begin()
 set rtp+=~/.vim/bundle/vundle/
 call vundle#begin()
 " Vundle let's you specify a plugin in a number of formats, but my favorite
@@ -43,6 +41,8 @@ Plugin 'klen/python-mode', { 'for': ['python'] }
 Plugin 'nvie/vim-flake8'
 " Snippets are separated from the engine. Add this if you want them:
 Plugin 'honza/vim-snippets'
+" Ruby plugin
+Plugin 'vim-ruby/vim-ruby'
 " All of your Plugins must be added before the following line
 call vundle#end() 
  
@@ -83,7 +83,8 @@ set gdefault " use the `g` flag by default.
 set virtualedit+=block
  
 " leader is a key that allows you to have your own "namespace" of keybindings.
-" You'll see it a lot below as <leader>
+" Default is \ but lets use ,
+" Whaterver you see with <leader> in shortcut, ',' in place of <leader>
 let mapleader = ","
 
 "Folding
@@ -92,6 +93,7 @@ set foldlevel=99
  
  
 " So we don't have to press shift when we want to get into command mode.
+" This has a perk of inablility to use ; when using f to find
 nnoremap ; :
 vnoremap ; :
  
@@ -185,7 +187,6 @@ let g:syntastic_warning_symbol = "⚠"
 " Remap ctrlp to ctrl-t -- map it however you like, or stick with the
 " defaults. Additionally, in my OS, I remap caps lock to control. I never use
 " caps lock. This is highly recommended.
-"let g:ctrlp_map = '<c-t>'
 " Let ctrlp have up to 30 results.
 let g:ctrlp_max_height = 30
 " ctrlp -ing buffers 
