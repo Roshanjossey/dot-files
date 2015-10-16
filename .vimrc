@@ -17,6 +17,8 @@ Plugin 'gmarik/vundle'
 Plugin 'scrooloose/syntastic'
 " File system
 Plugin 'scrooloose/nerdtree'
+" Repeat motion with <space>
+Plugin 'scrooloose/vim-space'
 " Just a shitload of color schemes.
 Plugin 'flazz/vim-colorschemes'
 " Autocompletion
@@ -39,10 +41,31 @@ Plugin 'bling/vim-airline'
 Plugin 'klen/python-mode', { 'for': ['python'] }
 " Flake8 plugin for Vim 
 Plugin 'nvie/vim-flake8'
+" Snippet engine
+Plugin 'SirVer/ultisnips'
 " Snippets are separated from the engine. Add this if you want them:
 Plugin 'honza/vim-snippets'
 " Ruby plugin
 Plugin 'vim-ruby/vim-ruby'
+" Extend funtionality of . repeat to plugin functions too
+Plugin 'tpope/vim-repeat'
+
+" Ruby/Rails
+
+" rails support
+Plugin 'tpope/vim-rails'
+" bundler integration (e.g. :Bopen)
+Plugin 'tpope/vim-bundler'
+" rake integration
+Plugin 'tpope/vim-rake'
+" ruby refactoring
+Plugin 'ecomba/vim-ruby-refactoring'
+" apidock.com docs integration
+Plugin 'apidock.vim'
+" toggle ruby blocks style
+Plugin 'vim-scripts/blockle.vim'
+" lightweight Rspec runner for Vim
+Plugin 'josemarluedke/vim-rspec'
 " All of your Plugins must be added before the following line
 call vundle#end() 
  
@@ -60,6 +83,7 @@ set shiftround " tab / shifting moves to closest tabstop.
 set autoindent " Match indents on new lines.
 set smartindent " Intellegently dedent / indent new lines based on rules.
 set number " Turn on line numbers 
+set relativenumber " This provides the current line number and others relatives
 " set background=dark " background
 set t_Co=256 " 256 color on terminal
 " We have VCS -- we don't need this stuff.
@@ -182,6 +206,10 @@ autocmd CursorMovedI * if pumvisible() == 0|pclose|endif
 autocmd InsertLeave * if pumvisible() == 0|pclose|endif
 let g:syntastic_error_symbol = "✗"
 let g:syntastic_warning_symbol = "⚠"
+let g:syntastic_always_populate_loc_list = 1 "This will put errors in vim's default thingy
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0 "Don't wanna be bugged when closing right?
 
 "------------------------ctrl p stuff-----------------------------------------
 " Remap ctrlp to ctrl-t -- map it however you like, or stick with the
@@ -206,7 +234,7 @@ au FileType go nmap <Leader>gv <Plug>(go-doc-vertical)
 
 "---------------------------snippets------------------------------------------
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
-let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsExpandTrigger="<cr>"
 let g:UltiSnipsJumpForwardTrigger="<c-b>"
 let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 

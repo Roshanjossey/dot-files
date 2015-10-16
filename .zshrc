@@ -1,5 +1,5 @@
 # Path to your oh-my-zsh installation.
-export ZSH=/home/harsh/.oh-my-zsh
+export ZSH=/home/multunus/.oh-my-zsh
 
 # zsh supporting all colors
 export TERM=xterm-256color
@@ -7,16 +7,17 @@ export TERM=xterm-256color
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-ZSH_THEME="kardan"
-# POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(dir)
-# POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(longstatus rbenv vcs  time)
+# ZSH_THEME="kardan"
+ZSH_THEME="powerlevel9k/powerlevel9k"
+POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(dir)
+POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(longstatus rbenv vcs  time)
 # Advanced `vcs` color customization
-# POWERLEVEL9K_VCS_FOREGROUND='black'
-# POWERLEVEL9K_VCS_DARK_FOREGROUND='black'
-# POWERLEVEL9K_VCS_BACKGROUND='green'
+POWERLEVEL9K_VCS_FOREGROUND='black'
+POWERLEVEL9K_VCS_DARK_FOREGROUND='black'
+POWERLEVEL9K_VCS_BACKGROUND='green'
 # If VCS changes are detected:
-# POWERLEVEL9K_VCS_MODIFIED_FOREGROUND='red'
-# POWERLEVEL9K_VCS_MODIFIED_BACKGROUND='cyan'
+POWERLEVEL9K_VCS_MODIFIED_FOREGROUND='red'
+POWERLEVEL9K_VCS_MODIFIED_BACKGROUND='cyan'
 # POWERLEVEL9K_PROMPT_ON_NEWLINE=true
 
 # Uncomment the following line to use case-sensitive completion.
