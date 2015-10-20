@@ -17,12 +17,16 @@ Plugin 'gmarik/vundle'
 Plugin 'scrooloose/syntastic'
 " File system
 Plugin 'scrooloose/nerdtree'
-" Repeat motion with <space>
-Plugin 'scrooloose/vim-space'
 " Just a shitload of color schemes.
 Plugin 'flazz/vim-colorschemes'
 " Autocompletion
 Plugin 'Valloric/YouCompleteMe', { 'do': './install.sh' }
+" Snippets engine
+Plugin 'SirVer/ultisnips'
+" Snippets
+Plugin 'honza/vim-snippets'
+" Super tab says it'll take care of all completons using <tab>
+Plugin 'ervandew/supertab'
 " Fuzzy finder -- absolutely must have.
 Plugin 'kien/ctrlp.vim'
 " Go plugin
@@ -41,10 +45,6 @@ Plugin 'bling/vim-airline'
 Plugin 'klen/python-mode', { 'for': ['python'] }
 " Flake8 plugin for Vim 
 Plugin 'nvie/vim-flake8'
-" Snippet engine
-Plugin 'SirVer/ultisnips'
-" Snippets are separated from the engine. Add this if you want them:
-Plugin 'honza/vim-snippets'
 " Ruby plugin
 Plugin 'vim-ruby/vim-ruby'
 " Extend funtionality of . repeat to plugin functions too
@@ -191,6 +191,18 @@ au VimLeave * :call MakeSession()
 "------------------------commentary stuff---------------------------------
 " Map the key for toggling comments with vim-commentary
 nnoremap <leader>c <Plug>CommentaryLine
+"------------------------You complete me---------------------------------
+" make YCM compatible with UltiSnips (using supertab)
+let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
+let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
+"------------------------Super tab---------------------------------
+let g:SuperTabDefaultCompletionType = '<C-n>'
+
+"------------------------UltiSnips---------------------------------
+" better key bindings for UltiSnipsExpandTrigger
+let g:UltiSnipsExpandTrigger = "<tab>"
+let g:UltiSnipsJumpForwardTrigger = "<tab>"
+let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
 "-------------------------airline stuff---------------------------------------
 "airline
 set laststatus=2
@@ -232,14 +244,6 @@ au FileType go nmap <leader>c <Plug>(go-coverage)
 au FileType go nmap <Leader>gd <Plug>(go-doc)
 au FileType go nmap <Leader>gv <Plug>(go-doc-vertical)
 
-"---------------------------snippets------------------------------------------
-" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
-let g:UltiSnipsExpandTrigger="<cr>"
-let g:UltiSnipsJumpForwardTrigger="<c-b>"
-let g:UltiSnipsJumpBackwardTrigger="<c-z>"
-
-" If you want :UltiSnipsEdit to split your window.
-let g:UltiSnipsEditSplit="vertical"
 "---------------------------colorscheme----------------------------------------
 
 colorscheme molokai
