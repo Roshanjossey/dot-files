@@ -2,28 +2,17 @@ let SessionLoad = 1
 if &cp | set nocp | endif
 let s:cpo_save=&cpo
 set cpo&vim
-inoremap <expr> <Down> pumvisible() ? "\" : "\<Down>"
-inoremap <expr> <S-Tab> pumvisible() ? "\" : "\<S-Tab>"
-inoremap <expr> <Up> pumvisible() ? "\" : "\<Up>"
-imap <Nul> <C-Space>
 inoremap <C-Space> 
+imap <Nul> <C-Space>
+inoremap <expr> <Up> pumvisible() ? "\" : "\<Up>"
+inoremap <expr> <S-Tab> pumvisible() ? "\" : "\<S-Tab>"
+inoremap <expr> <Down> pumvisible() ? "\" : "\<Down>"
 nnoremap  h
 nnoremap <NL> j
 nnoremap  k
 nnoremap  l
 nnoremap <silent>  :CtrlP
 nnoremap ,d :YcmShowDetailedDiagnostic
-vnoremap ,rem :RExtractMethod
-vnoremap ,rriv :RRenameInstanceVariable
-vnoremap ,rrlv :RRenameLocalVariable
-vnoremap ,relv :RExtractLocalVariable
-vnoremap ,rec :RExtractConstant
-nnoremap ,riv :RIntroduceVariable
-nnoremap ,rcpc :RConvertPostConditional
-nnoremap ,rel :RExtractLet
-nnoremap ,rit :RInlineTemp
-nnoremap ,rapn :RAddParameterNB
-nnoremap ,rap :RAddParameter
 map ,b :CtrlPBuffer
 nnoremap ,c <Plug>CommentaryLine
 noremap ,s s
@@ -32,11 +21,8 @@ nnoremap ,, 
 noremap ,  :noh:call clearmatches()
 vnoremap / /\v
 nnoremap / /\v
-nnoremap ; :
 vnoremap ; :
-noremap RS :call OpenRspecDoc(expand('<cword>'))
-noremap RR :call OpenRailsDoc(expand('<cword>'))
-noremap RB :call OpenRubyDoc(expand('<cword>'))
+nnoremap ; :
 xmap S <Plug>VSurround
 nmap [xx <Plug>unimpaired_line_xml_encode
 xmap [x <Plug>unimpaired_xml_encode
@@ -182,10 +168,10 @@ set hlsearch
 set ignorecase
 set incsearch
 set laststatus=2
-set operatorfunc=<SNR>52_go
+set omnifunc=youcompleteme#OmniComplete
 set printoptions=paper:a4
 set ruler
-set runtimepath=~/.vim,~/.vim/bundle/vundle,~/.vim/bundle/syntastic,~/.vim/bundle/nerdtree,~/.vim/bundle/vim-colorschemes,~/.vim/bundle/YouCompleteMe,~/.vim/bundle/ctrlp.vim,~/.vim/bundle/vim-go,~/.vim/bundle/vim-commentary,~/.vim/bundle/vim-surround,~/.vim/bundle/vim-fugitive,~/.vim/bundle/vim-unimpaired,~/.vim/bundle/vim-airline,~/.vim/bundle/python-mode,~/.vim/bundle/vim-flake8,~/.vim/bundle/vim-snippets,/var/lib/vim/addons,/usr/share/vim/vimfiles,/usr/share/vim/vim74,/usr/share/vim/vimfiles/after,/var/lib/vim/addons/after,~/.vim/after,~/.vim/bundle/vundle/,~/.vim/bundle/vundle/after,~/.vim/bundle/syntastic/after,~/.vim/bundle/nerdtree/after,~/.vim/bundle/vim-colorschemes/after,~/.vim/bundle/YouCompleteMe/after,~/.vim/bundle/ctrlp.vim/after,~/.vim/bundle/vim-go/after,~/.vim/bundle/vim-commentary/after,~/.vim/bundle/vim-surround/after,~/.vim/bundle/vim-fugitive/after,~/.vim/bundle/vim-unimpaired/after,~/.vim/bundle/vim-airline/after,~/.vim/bundle/python-mode/after,~/.vim/bundle/vim-flake8/after,~/.vim/bundle/vim-snippets/after
+set runtimepath=~/.vim,~/.vim/bundle/vundle,~/.vim/bundle/syntastic,~/.vim/bundle/nerdtree,~/.vim/bundle/vim-colorschemes,~/.vim/bundle/YouCompleteMe,~/.vim/bundle/ctrlp.vim,~/.vim/bundle/vim-go,~/.vim/bundle/vim-commentary,~/.vim/bundle/vim-surround,~/.vim/bundle/vim-fugitive,~/.vim/bundle/vim-unimpaired,~/.vim/bundle/vim-airline,~/.vim/bundle/python-mode,~/.vim/bundle/vim-flake8,~/.vim/bundle/vim-snippets,~/.vim/bundle/vim-ruby,/var/lib/vim/addons,/usr/share/vim/vimfiles,/usr/share/vim/vim74,/usr/share/vim/vimfiles/after,/var/lib/vim/addons/after,~/.vim/after,~/.vim/bundle/vundle/,~/.vim/bundle/vundle/after,~/.vim/bundle/syntastic/after,~/.vim/bundle/nerdtree/after,~/.vim/bundle/vim-colorschemes/after,~/.vim/bundle/YouCompleteMe/after,~/.vim/bundle/ctrlp.vim/after,~/.vim/bundle/vim-go/after,~/.vim/bundle/vim-commentary/after,~/.vim/bundle/vim-surround/after,~/.vim/bundle/vim-fugitive/after,~/.vim/bundle/vim-unimpaired/after,~/.vim/bundle/vim-airline/after,~/.vim/bundle/python-mode/after,~/.vim/bundle/vim-flake8/after,~/.vim/bundle/vim-snippets/after,~/.vim/bundle/vim-ruby/after
 set shiftround
 set shiftwidth=4
 set showmatch
@@ -202,39 +188,85 @@ set tabline=%!airline#extensions#tabline#get()
 set tabstop=4
 set updatetime=2000
 set virtualedit=block
-set window=25
+set wildignore=*.pyc
+set window=23
 set nowritebackup
 let s:so_save = &so | let s:siso_save = &siso | set so=0 siso=0
 let v:this_session=expand("<sfile>:p")
 silent only
-cd ~/training/ruby
+cd ~/Eratosthenes-Sieves
 if expand('%') == '' && !&modified && line('$') <= 1 && getline(1) == ''
   let s:wipebuf = bufnr('%')
 endif
 set shortmess=aoO
-badd +1 mixins.rb
-badd +1 csv_reader.rb
-badd +2 word_count/words_from_string.rb
-badd +2 \[Vundle]\ clean
+badd +0 Prime\ in\ a\ range.py
 argglobal
 silent! argdel *
-edit word_count/words_from_string.rb
+edit Prime\ in\ a\ range.py
 set splitbelow splitright
+wincmd _ | wincmd |
+split
+1wincmd k
+wincmd w
 wincmd t
 set winheight=1 winwidth=1
+exe '1resize ' . ((&lines * 17 + 12) / 24)
+exe '2resize ' . ((&lines * 3 + 12) / 24)
 argglobal
-nnoremap <buffer> <silent> g} :exe        "ptjump =RubyCursorIdentifier()"
-nnoremap <buffer> <silent> } :exe          "ptag =RubyCursorIdentifier()"
-nnoremap <buffer> <silent> g] :exe      "stselect =RubyCursorIdentifier()"
-nnoremap <buffer> <silent> g :exe        "stjump =RubyCursorIdentifier()"
-nnoremap <buffer> <silent>  :exe v:count1."stag =RubyCursorIdentifier()"
-nnoremap <buffer> <silent> ] :exe v:count1."stag =RubyCursorIdentifier()"
-nnoremap <buffer> <silent>  :exe  v:count1."tag =RubyCursorIdentifier()"
 let s:cpo_save=&cpo
 set cpo&vim
-map <buffer> ,b <Plug>BlockToggle
-nnoremap <buffer> <silent> g] :exe       "tselect =RubyCursorIdentifier()"
-nnoremap <buffer> <silent> g :exe         "tjump =RubyCursorIdentifier()"
+inoremap <buffer> <silent> <Nul> =pymode#rope#complete(0)
+inoremap <buffer> <silent> <C-Space> =pymode#rope#complete(0)
+noremap <buffer> <silent> ra :PymodeRopeAutoImport
+noremap <buffer> <silent> r1p :call pymode#rope#module_to_package()
+noremap <buffer> <silent> rnc :call pymode#rope#generate_class()
+noremap <buffer> <silent> rnp :call pymode#rope#generate_package()
+noremap <buffer> <silent> rnf :call pymode#rope#generate_function()
+noremap <buffer> <silent> ru :call pymode#rope#use_function()
+noremap <buffer> <silent> rs :call pymode#rope#signature()
+noremap <buffer> <silent> rv :call pymode#rope#move()
+noremap <buffer> <silent> ri :call pymode#rope#inline()
+vnoremap <buffer> <silent> rl :call pymode#rope#extract_variable()
+vnoremap <buffer> <silent> rm :call pymode#rope#extract_method()
+noremap <buffer> <silent> r1r :call pymode#rope#rename_module()
+noremap <buffer> <silent> rr :call pymode#rope#rename()
+noremap <buffer> <silent> ro :call pymode#rope#organize_imports()
+noremap <buffer> <silent> f :call pymode#rope#find_it()
+noremap <buffer> <silent> d :call pymode#rope#show_doc()
+noremap <buffer> <silent> g :call pymode#rope#goto_definition()
+nnoremap <buffer> <silent> ,b :call pymode#breakpoint#operate(line('.'))
+vnoremap <buffer> <silent> ,r :PymodeRun
+nnoremap <buffer> <silent> ,r :PymodeRun
+onoremap <buffer> C :call pymode#motion#select('^\s*class\s', 0)
+vnoremap <buffer> <silent> K :call pymode#doc#show(@*)
+nnoremap <buffer> <silent> K :call pymode#doc#find()
+onoremap <buffer> M :call pymode#motion#select('^\s*def\s', 0)
+vnoremap <buffer> [M :call pymode#motion#vmove('^\s*def\s', 'b')
+vnoremap <buffer> [[ :call pymode#motion#vmove('\v^(class|def)\s', 'b')
+onoremap <buffer> [M :call pymode#motion#move('^\s*def\s', 'b')
+onoremap <buffer> [C :call pymode#motion#move('\v^(class|def)\s', 'b')
+onoremap <buffer> [[ :call pymode#motion#move('\v^(class|def)\s', 'b')
+nnoremap <buffer> [M :call pymode#motion#move('^\s*def\s', 'b')
+nnoremap <buffer> [C :call pymode#motion#move('\v^(class|def)\s', 'b')
+nnoremap <buffer> [[ :call pymode#motion#move('\v^(class|def)\s', 'b')
+vnoremap <buffer> ]M :call pymode#motion#vmove('^\s*def\s', '')
+vnoremap <buffer> ]] :call pymode#motion#vmove('\v^(class|def)\s', '')
+onoremap <buffer> ]M :call pymode#motion#move('^\s*def\s', '')
+onoremap <buffer> ]C :call pymode#motion#move('\v^(class|def)\s', '')
+onoremap <buffer> ]] :call pymode#motion#move('\v^(class|def)\s', '')
+nnoremap <buffer> ]M :call pymode#motion#move('^\s*def\s', '')
+nnoremap <buffer> ]C :call pymode#motion#move('\v^(class|def)\s', '')
+nnoremap <buffer> ]] :call pymode#motion#move('\v^(class|def)\s', '')
+vnoremap <buffer> aM :call pymode#motion#select('^\s*def\s', 0)
+onoremap <buffer> aM :call pymode#motion#select('^\s*def\s', 0)
+vnoremap <buffer> aC :call pymode#motion#select('^\s*class\s', 0)
+onoremap <buffer> aC :call pymode#motion#select('^\s*class\s', 0)
+vnoremap <buffer> iM :call pymode#motion#select('^\s*def\s', 1)
+onoremap <buffer> iM :call pymode#motion#select('^\s*def\s', 1)
+vnoremap <buffer> iC :call pymode#motion#select('^\s*class\s', 1)
+onoremap <buffer> iC :call pymode#motion#select('^\s*class\s', 1)
+noremap <buffer> <F7> :call flake8#Flake8()
+inoremap <buffer> <silent> . .=pymode#rope#complete_on_dot()
 let &cpo=s:cpo_save
 unlet s:cpo_save
 setlocal keymap=
@@ -245,12 +277,126 @@ setlocal bufhidden=
 setlocal buflisted
 setlocal buftype=
 setlocal nocindent
+setlocal cinkeys=0{,0},0),:,!^F,o,O,e
+setlocal cinoptions=
+setlocal cinwords=if,else,while,do,for,switch
+setlocal colorcolumn=+1
+setlocal comments=b:#,fb:-
+setlocal commentstring=#\ %s
+setlocal complete=.,w,b,u,t,i
+setlocal concealcursor=
+setlocal conceallevel=0
+setlocal completefunc=youcompleteme#Complete
+setlocal nocopyindent
+setlocal cryptmethod=
+setlocal nocursorbind
+setlocal nocursorcolumn
+setlocal nocursorline
+setlocal define=^s*\\(def\\|class\\)
+setlocal dictionary=
+setlocal nodiff
+setlocal equalprg=
+setlocal errorformat=
+setlocal expandtab
+if &filetype != 'python'
+setlocal filetype=python
+endif
+setlocal foldcolumn=0
+setlocal foldenable
+setlocal foldexpr=pymode#folding#expr(v:lnum)
+setlocal foldignore=#
+set foldlevel=99
+setlocal foldlevel=99
+setlocal foldmarker={{{,}}}
+set foldmethod=indent
+setlocal foldmethod=expr
+setlocal foldminlines=1
+setlocal foldnestmax=20
+setlocal foldtext=pymode#folding#text()
+setlocal formatexpr=
+setlocal formatoptions=cq
+setlocal formatlistpat=^\\s*\\d\\+[\\]:.)}\\t\ ]\\s*
+setlocal grepprg=
+setlocal iminsert=0
+setlocal imsearch=0
+setlocal include=^\\s*\\(from\\|import\\)
+setlocal includeexpr=substitute(v:fname,'\\.','/','g')
+setlocal indentexpr=pymode#indent#get_indent(v:lnum)
+setlocal indentkeys=!^F,o,O,<:>,0),0],0},=elif,=except
+setlocal noinfercase
+setlocal iskeyword=@,48-57,_,192-255
+setlocal keywordprg=pydoc
+setlocal nolinebreak
+setlocal nolisp
+setlocal lispwords=
+setlocal nolist
+setlocal makeprg=
+setlocal matchpairs=(:),{:},[:]
+setlocal modeline
+setlocal modifiable
+setlocal nrformats=octal,hex
+set number
+setlocal number
+setlocal numberwidth=4
+setlocal omnifunc=youcompleteme#OmniComplete
+setlocal path=
+setlocal nopreserveindent
+setlocal nopreviewwindow
+setlocal quoteescape=\\
+setlocal noreadonly
+set relativenumber
+setlocal relativenumber
+setlocal norightleft
+setlocal rightleftcmd=search
+setlocal noscrollbind
+setlocal shiftwidth=4
+setlocal noshortname
+setlocal smartindent
+setlocal softtabstop=4
+setlocal nospell
+setlocal spellcapcheck=[.?!]\\_[\\])'\"\	\ ]\\+
+setlocal spellfile=
+setlocal spelllang=en
+setlocal statusline=%!airline#statusline(1)
+setlocal suffixesadd=.py
+setlocal noswapfile
+setlocal synmaxcol=3000
+if &syntax != 'python'
+setlocal syntax=python
+endif
+setlocal tabstop=4
+setlocal tags=
+setlocal textwidth=80
+setlocal thesaurus=
+setlocal noundofile
+setlocal undolevels=-123456
+setlocal nowinfixheight
+setlocal nowinfixwidth
+setlocal nowrap
+setlocal wrapmargin=0
+let s:l = 30 - ((11 * winheight(0) + 8) / 17)
+if s:l < 1 | let s:l = 1 | endif
+exe s:l
+normal! zt
+30
+normal! 010|
+wincmd w
+argglobal
+enew
+setlocal keymap=
+setlocal noarabic
+setlocal autoindent
+setlocal nobinary
+setlocal bufhidden=wipe
+setlocal buflisted
+setlocal buftype=quickfix
+setlocal nocindent
 setlocal cinkeys=0{,0},0),:,0#,!^F,o,O,e
 setlocal cinoptions=
 setlocal cinwords=if,else,while,do,for,switch
 setlocal colorcolumn=
-setlocal comments=:#
-setlocal commentstring=#\ %s
+setlocal comments=s1:/*,mb:*,ex:*/,://,b:#,:%,:XCOMM,n:>,fb:-
+setlocal commentstring=/*%s*/
 setlocal complete=.,w,b,u,t,i
 setlocal concealcursor=
 setlocal conceallevel=0
@@ -266,34 +412,34 @@ setlocal nodiff
 setlocal equalprg=
 setlocal errorformat=
 setlocal expandtab
-if &filetype != 'ruby'
-setlocal filetype=ruby
+if &filetype != 'qf'
+setlocal filetype=qf
 endif
 setlocal foldcolumn=0
 setlocal foldenable
 setlocal foldexpr=0
 setlocal foldignore=#
 set foldlevel=99
-setlocal foldlevel=1
+setlocal foldlevel=99
 setlocal foldmarker={{{,}}}
 set foldmethod=indent
-setlocal foldmethod=indent
+setlocal foldmethod=manual
 setlocal foldminlines=1
 setlocal foldnestmax=20
 setlocal foldtext=foldtext()
 setlocal formatexpr=
-setlocal formatoptions=croql
+setlocal formatoptions=tcq
 setlocal formatlistpat=^\\s*\\d\\+[\\]:.)}\\t\ ]\\s*
 setlocal grepprg=
 setlocal iminsert=0
 setlocal imsearch=0
-setlocal include=^\\s*\\<\\(load\\>\\|require\\>\\|autoload\\s*:\\=[\"']\\=\\h\\w*[\"']\\=,\\)
-setlocal includeexpr=substitute(substitute(v:fname,'::','/','g'),'$','.rb','')
-setlocal indentexpr=GetRubyIndent(v:lnum)
-setlocal indentkeys=0{,0},0),0],!^F,o,O,e,=end,=else,=elsif,=when,=ensure,=rescue,==begin,==end
+setlocal include=
+setlocal includeexpr=
+setlocal indentexpr=
+setlocal indentkeys=0{,0},:,0#,!^F,o,O,e
 setlocal noinfercase
 setlocal iskeyword=@,48-57,_,192-255
-setlocal keywordprg=ri
+setlocal keywordprg=
 setlocal nolinebreak
 setlocal nolisp
 setlocal lispwords=
@@ -301,53 +447,50 @@ setlocal nolist
 setlocal makeprg=
 setlocal matchpairs=(:),{:},[:]
 setlocal modeline
-setlocal modifiable
+setlocal nomodifiable
 setlocal nrformats=octal,hex
 set number
 setlocal number
 setlocal numberwidth=4
-setlocal omnifunc=
-setlocal path=~/.rvm/rubies/ruby-2.2.3/lib/ruby/site_ruby/2.2.0,~/.rvm/rubies/ruby-2.2.3/lib/ruby/site_ruby/2.2.0/i686-linux,~/.rvm/rubies/ruby-2.2.3/lib/ruby/site_ruby,~/.rvm/rubies/ruby-2.2.3/lib/ruby/vendor_ruby/2.2.0,~/.rvm/rubies/ruby-2.2.3/lib/ruby/vendor_ruby/2.2.0/i686-linux,~/.rvm/rubies/ruby-2.2.3/lib/ruby/vendor_ruby,~/.rvm/rubies/ruby-2.2.3/lib/ruby/2.2.0,~/.rvm/rubies/ruby-2.2.3/lib/ruby/2.2.0/i686-linux
+setlocal omnifunc=youcompleteme#OmniComplete
+setlocal path=
 setlocal nopreserveindent
 setlocal nopreviewwindow
 setlocal quoteescape=\\
 setlocal noreadonly
 set relativenumber
-setlocal norelativenumber
+setlocal relativenumber
 setlocal norightleft
 setlocal rightleftcmd=search
 setlocal noscrollbind
 setlocal shiftwidth=4
 setlocal noshortname
-setlocal nosmartindent
+setlocal smartindent
 setlocal softtabstop=4
 setlocal nospell
 setlocal spellcapcheck=[.?!]\\_[\\])'\"\	\ ]\\+
 setlocal spellfile=
 setlocal spelllang=en
-setlocal statusline=%!airline#statusline(1)
-setlocal suffixesadd=.rb
+setlocal statusline=%!airline#statusline(2)
+setlocal suffixesadd=
 setlocal noswapfile
 setlocal synmaxcol=3000
-if &syntax != 'ruby'
-setlocal syntax=ruby
+if &syntax != 'qf'
+setlocal syntax=qf
 endif
 setlocal tabstop=4
-setlocal tags=./tags,./TAGS,tags,TAGS,~/.rvm/rubies/ruby-2.2.3/lib/ruby/site_ruby/2.2.0/tags,~/.rvm/rubies/ruby-2.2.3/lib/ruby/site_ruby/2.2.0/i686-linux/tags,~/.rvm/rubies/ruby-2.2.3/lib/ruby/site_ruby/tags,~/.rvm/rubies/ruby-2.2.3/lib/ruby/vendor_ruby/2.2.0/tags,~/.rvm/rubies/ruby-2.2.3/lib/ruby/vendor_ruby/2.2.0/i686-linux/tags,~/.rvm/rubies/ruby-2.2.3/lib/ruby/vendor_ruby/tags,~/.rvm/rubies/ruby-2.2.3/lib/ruby/2.2.0/tags,~/.rvm/rubies/ruby-2.2.3/lib/ruby/2.2.0/i686-linux/tags
+setlocal tags=
 setlocal textwidth=0
 setlocal thesaurus=
 setlocal noundofile
 setlocal undolevels=-123456
-setlocal nowinfixheight
+setlocal winfixheight
 setlocal nowinfixwidth
-setlocal wrap
+setlocal nowrap
 setlocal wrapmargin=0
-let s:l = 2 - ((1 * winheight(0) + 21) / 43)
-if s:l < 1 | let s:l = 1 | endif
-exe s:l
-normal! zt
-2
-normal! 05|
+wincmd w
+exe '1resize ' . ((&lines * 17 + 12) / 24)
+exe '2resize ' . ((&lines * 3 + 12) / 24)
 tabnext 1
 if exists('s:wipebuf')
   silent exe 'bwipe ' . s:wipebuf

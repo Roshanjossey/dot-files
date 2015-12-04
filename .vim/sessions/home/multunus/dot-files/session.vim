@@ -2,28 +2,17 @@ let SessionLoad = 1
 if &cp | set nocp | endif
 let s:cpo_save=&cpo
 set cpo&vim
-inoremap <expr> <Down> pumvisible() ? "\" : "\<Down>"
-inoremap <expr> <S-Tab> pumvisible() ? "\" : "\<S-Tab>"
-inoremap <expr> <Up> pumvisible() ? "\" : "\<Up>"
-imap <Nul> <C-Space>
 inoremap <C-Space> 
+imap <Nul> <C-Space>
+inoremap <expr> <Up> pumvisible() ? "\" : "\<Up>"
+inoremap <expr> <S-Tab> pumvisible() ? "\" : "\<S-Tab>"
+inoremap <expr> <Down> pumvisible() ? "\" : "\<Down>"
 nnoremap  h
 nnoremap <NL> j
 nnoremap  k
 nnoremap  l
 nnoremap <silent>  :CtrlP
 nnoremap ,d :YcmShowDetailedDiagnostic
-vnoremap ,rem :RExtractMethod
-vnoremap ,rriv :RRenameInstanceVariable
-vnoremap ,rrlv :RRenameLocalVariable
-vnoremap ,relv :RExtractLocalVariable
-vnoremap ,rec :RExtractConstant
-nnoremap ,riv :RIntroduceVariable
-nnoremap ,rcpc :RConvertPostConditional
-nnoremap ,rel :RExtractLet
-nnoremap ,rit :RInlineTemp
-nnoremap ,rapn :RAddParameterNB
-nnoremap ,rap :RAddParameter
 map ,b :CtrlPBuffer
 nnoremap ,c <Plug>CommentaryLine
 noremap ,s s
@@ -32,11 +21,8 @@ nnoremap ,, 
 noremap ,  :noh:call clearmatches()
 vnoremap / /\v
 nnoremap / /\v
-nnoremap ; :
 vnoremap ; :
-noremap RS :call OpenRspecDoc(expand('<cword>'))
-noremap RR :call OpenRailsDoc(expand('<cword>'))
-noremap RB :call OpenRubyDoc(expand('<cword>'))
+nnoremap ; :
 xmap S <Plug>VSurround
 nmap [xx <Plug>unimpaired_line_xml_encode
 xmap [x <Plug>unimpaired_xml_encode
@@ -182,10 +168,9 @@ set hlsearch
 set ignorecase
 set incsearch
 set laststatus=2
-set operatorfunc=<SNR>52_go
 set printoptions=paper:a4
 set ruler
-set runtimepath=~/.vim,~/.vim/bundle/vundle,~/.vim/bundle/syntastic,~/.vim/bundle/nerdtree,~/.vim/bundle/vim-colorschemes,~/.vim/bundle/YouCompleteMe,~/.vim/bundle/ctrlp.vim,~/.vim/bundle/vim-go,~/.vim/bundle/vim-commentary,~/.vim/bundle/vim-surround,~/.vim/bundle/vim-fugitive,~/.vim/bundle/vim-unimpaired,~/.vim/bundle/vim-airline,~/.vim/bundle/python-mode,~/.vim/bundle/vim-flake8,~/.vim/bundle/vim-snippets,/var/lib/vim/addons,/usr/share/vim/vimfiles,/usr/share/vim/vim74,/usr/share/vim/vimfiles/after,/var/lib/vim/addons/after,~/.vim/after,~/.vim/bundle/vundle/,~/.vim/bundle/vundle/after,~/.vim/bundle/syntastic/after,~/.vim/bundle/nerdtree/after,~/.vim/bundle/vim-colorschemes/after,~/.vim/bundle/YouCompleteMe/after,~/.vim/bundle/ctrlp.vim/after,~/.vim/bundle/vim-go/after,~/.vim/bundle/vim-commentary/after,~/.vim/bundle/vim-surround/after,~/.vim/bundle/vim-fugitive/after,~/.vim/bundle/vim-unimpaired/after,~/.vim/bundle/vim-airline/after,~/.vim/bundle/python-mode/after,~/.vim/bundle/vim-flake8/after,~/.vim/bundle/vim-snippets/after
+set runtimepath=~/.vim,~/.vim/bundle/vundle,~/.vim/bundle/syntastic,~/.vim/bundle/nerdtree,~/.vim/bundle/vim-colorschemes,~/.vim/bundle/YouCompleteMe,~/.vim/bundle/ctrlp.vim,~/.vim/bundle/vim-go,~/.vim/bundle/vim-commentary,~/.vim/bundle/vim-surround,~/.vim/bundle/vim-fugitive,~/.vim/bundle/vim-unimpaired,~/.vim/bundle/vim-airline,~/.vim/bundle/python-mode,~/.vim/bundle/vim-flake8,~/.vim/bundle/vim-snippets,~/.vim/bundle/vim-ruby,/var/lib/vim/addons,/usr/share/vim/vimfiles,/usr/share/vim/vim74,/usr/share/vim/vimfiles/after,/var/lib/vim/addons/after,~/.vim/after,~/.vim/bundle/vundle/,~/.vim/bundle/vundle/after,~/.vim/bundle/syntastic/after,~/.vim/bundle/nerdtree/after,~/.vim/bundle/vim-colorschemes/after,~/.vim/bundle/YouCompleteMe/after,~/.vim/bundle/ctrlp.vim/after,~/.vim/bundle/vim-go/after,~/.vim/bundle/vim-commentary/after,~/.vim/bundle/vim-surround/after,~/.vim/bundle/vim-fugitive/after,~/.vim/bundle/vim-unimpaired/after,~/.vim/bundle/vim-airline/after,~/.vim/bundle/python-mode/after,~/.vim/bundle/vim-flake8/after,~/.vim/bundle/vim-snippets/after,~/.vim/bundle/vim-ruby/after
 set shiftround
 set shiftwidth=4
 set showmatch
@@ -202,41 +187,23 @@ set tabline=%!airline#extensions#tabline#get()
 set tabstop=4
 set updatetime=2000
 set virtualedit=block
-set window=25
 set nowritebackup
 let s:so_save = &so | let s:siso_save = &siso | set so=0 siso=0
 let v:this_session=expand("<sfile>:p")
 silent only
-cd ~/training/ruby
+cd ~/dot-files
 if expand('%') == '' && !&modified && line('$') <= 1 && getline(1) == ''
   let s:wipebuf = bufnr('%')
 endif
 set shortmess=aoO
-badd +1 mixins.rb
-badd +1 csv_reader.rb
-badd +2 word_count/words_from_string.rb
-badd +2 \[Vundle]\ clean
+badd +0 snapdeal.sd
 argglobal
 silent! argdel *
-edit word_count/words_from_string.rb
+edit snapdeal.sd
 set splitbelow splitright
 wincmd t
 set winheight=1 winwidth=1
 argglobal
-nnoremap <buffer> <silent> g} :exe        "ptjump =RubyCursorIdentifier()"
-nnoremap <buffer> <silent> } :exe          "ptag =RubyCursorIdentifier()"
-nnoremap <buffer> <silent> g] :exe      "stselect =RubyCursorIdentifier()"
-nnoremap <buffer> <silent> g :exe        "stjump =RubyCursorIdentifier()"
-nnoremap <buffer> <silent>  :exe v:count1."stag =RubyCursorIdentifier()"
-nnoremap <buffer> <silent> ] :exe v:count1."stag =RubyCursorIdentifier()"
-nnoremap <buffer> <silent>  :exe  v:count1."tag =RubyCursorIdentifier()"
-let s:cpo_save=&cpo
-set cpo&vim
-map <buffer> ,b <Plug>BlockToggle
-nnoremap <buffer> <silent> g] :exe       "tselect =RubyCursorIdentifier()"
-nnoremap <buffer> <silent> g :exe         "tjump =RubyCursorIdentifier()"
-let &cpo=s:cpo_save
-unlet s:cpo_save
 setlocal keymap=
 setlocal noarabic
 setlocal autoindent
@@ -249,8 +216,8 @@ setlocal cinkeys=0{,0},0),:,0#,!^F,o,O,e
 setlocal cinoptions=
 setlocal cinwords=if,else,while,do,for,switch
 setlocal colorcolumn=
-setlocal comments=:#
-setlocal commentstring=#\ %s
+setlocal comments=s1:/*,mb:*,ex:*/,://,b:#,:%,:XCOMM,n:>,fb:-
+setlocal commentstring=/*%s*/
 setlocal complete=.,w,b,u,t,i
 setlocal concealcursor=
 setlocal conceallevel=0
@@ -266,15 +233,15 @@ setlocal nodiff
 setlocal equalprg=
 setlocal errorformat=
 setlocal expandtab
-if &filetype != 'ruby'
-setlocal filetype=ruby
+if &filetype != 'sd'
+setlocal filetype=sd
 endif
 setlocal foldcolumn=0
 setlocal foldenable
 setlocal foldexpr=0
 setlocal foldignore=#
 set foldlevel=99
-setlocal foldlevel=1
+setlocal foldlevel=99
 setlocal foldmarker={{{,}}}
 set foldmethod=indent
 setlocal foldmethod=indent
@@ -282,18 +249,18 @@ setlocal foldminlines=1
 setlocal foldnestmax=20
 setlocal foldtext=foldtext()
 setlocal formatexpr=
-setlocal formatoptions=croql
+setlocal formatoptions=tcq
 setlocal formatlistpat=^\\s*\\d\\+[\\]:.)}\\t\ ]\\s*
 setlocal grepprg=
 setlocal iminsert=0
 setlocal imsearch=0
-setlocal include=^\\s*\\<\\(load\\>\\|require\\>\\|autoload\\s*:\\=[\"']\\=\\h\\w*[\"']\\=,\\)
-setlocal includeexpr=substitute(substitute(v:fname,'::','/','g'),'$','.rb','')
-setlocal indentexpr=GetRubyIndent(v:lnum)
-setlocal indentkeys=0{,0},0),0],!^F,o,O,e,=end,=else,=elsif,=when,=ensure,=rescue,==begin,==end
+setlocal include=
+setlocal includeexpr=
+setlocal indentexpr=
+setlocal indentkeys=0{,0},:,0#,!^F,o,O,e
 setlocal noinfercase
 setlocal iskeyword=@,48-57,_,192-255
-setlocal keywordprg=ri
+setlocal keywordprg=
 setlocal nolinebreak
 setlocal nolisp
 setlocal lispwords=
@@ -307,33 +274,33 @@ set number
 setlocal number
 setlocal numberwidth=4
 setlocal omnifunc=
-setlocal path=~/.rvm/rubies/ruby-2.2.3/lib/ruby/site_ruby/2.2.0,~/.rvm/rubies/ruby-2.2.3/lib/ruby/site_ruby/2.2.0/i686-linux,~/.rvm/rubies/ruby-2.2.3/lib/ruby/site_ruby,~/.rvm/rubies/ruby-2.2.3/lib/ruby/vendor_ruby/2.2.0,~/.rvm/rubies/ruby-2.2.3/lib/ruby/vendor_ruby/2.2.0/i686-linux,~/.rvm/rubies/ruby-2.2.3/lib/ruby/vendor_ruby,~/.rvm/rubies/ruby-2.2.3/lib/ruby/2.2.0,~/.rvm/rubies/ruby-2.2.3/lib/ruby/2.2.0/i686-linux
+setlocal path=
 setlocal nopreserveindent
 setlocal nopreviewwindow
 setlocal quoteescape=\\
 setlocal noreadonly
 set relativenumber
-setlocal norelativenumber
+setlocal relativenumber
 setlocal norightleft
 setlocal rightleftcmd=search
 setlocal noscrollbind
 setlocal shiftwidth=4
 setlocal noshortname
-setlocal nosmartindent
+setlocal smartindent
 setlocal softtabstop=4
 setlocal nospell
 setlocal spellcapcheck=[.?!]\\_[\\])'\"\	\ ]\\+
 setlocal spellfile=
 setlocal spelllang=en
 setlocal statusline=%!airline#statusline(1)
-setlocal suffixesadd=.rb
+setlocal suffixesadd=
 setlocal noswapfile
 setlocal synmaxcol=3000
-if &syntax != 'ruby'
-setlocal syntax=ruby
+if &syntax != 'sd'
+setlocal syntax=sd
 endif
 setlocal tabstop=4
-setlocal tags=./tags,./TAGS,tags,TAGS,~/.rvm/rubies/ruby-2.2.3/lib/ruby/site_ruby/2.2.0/tags,~/.rvm/rubies/ruby-2.2.3/lib/ruby/site_ruby/2.2.0/i686-linux/tags,~/.rvm/rubies/ruby-2.2.3/lib/ruby/site_ruby/tags,~/.rvm/rubies/ruby-2.2.3/lib/ruby/vendor_ruby/2.2.0/tags,~/.rvm/rubies/ruby-2.2.3/lib/ruby/vendor_ruby/2.2.0/i686-linux/tags,~/.rvm/rubies/ruby-2.2.3/lib/ruby/vendor_ruby/tags,~/.rvm/rubies/ruby-2.2.3/lib/ruby/2.2.0/tags,~/.rvm/rubies/ruby-2.2.3/lib/ruby/2.2.0/i686-linux/tags
+setlocal tags=
 setlocal textwidth=0
 setlocal thesaurus=
 setlocal noundofile
@@ -342,12 +309,12 @@ setlocal nowinfixheight
 setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
-let s:l = 2 - ((1 * winheight(0) + 21) / 43)
+let s:l = 1 - ((0 * winheight(0) + 22) / 44)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-2
-normal! 05|
+1
+normal! 0
 tabnext 1
 if exists('s:wipebuf')
   silent exe 'bwipe ' . s:wipebuf

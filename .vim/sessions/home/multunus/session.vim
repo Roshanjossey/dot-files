@@ -2,11 +2,11 @@ let SessionLoad = 1
 if &cp | set nocp | endif
 let s:cpo_save=&cpo
 set cpo&vim
-inoremap <C-Space> 
-imap <Nul> <C-Space>
-inoremap <expr> <Up> pumvisible() ? "\" : "\<Up>"
-inoremap <expr> <S-Tab> pumvisible() ? "\" : "\<S-Tab>"
 inoremap <expr> <Down> pumvisible() ? "\" : "\<Down>"
+inoremap <expr> <S-Tab> pumvisible() ? "\" : "\<S-Tab>"
+inoremap <expr> <Up> pumvisible() ? "\" : "\<Up>"
+imap <Nul> <C-Space>
+inoremap <C-Space> 
 nnoremap  h
 nnoremap <NL> j
 nnoremap  k
@@ -189,6 +189,7 @@ set tabline=%!airline#extensions#tabline#get()
 set tabstop=4
 set updatetime=2000
 set virtualedit=block
+set window=45
 set nowritebackup
 let s:so_save = &so | let s:siso_save = &siso | set so=0 siso=0
 let v:this_session=expand("<sfile>:p")
@@ -198,8 +199,8 @@ if expand('%') == '' && !&modified && line('$') <= 1 && getline(1) == ''
   let s:wipebuf = bufnr('%')
 endif
 set shortmess=aoO
-badd +1 .vimrc
-badd +2 .zshrc
+badd +182 .vimrc
+badd +17 .zshrc
 badd +4 .tmux.conf
 argglobal
 silent! argdel *
@@ -257,7 +258,7 @@ setlocal foldenable
 setlocal foldexpr=0
 setlocal foldignore=#
 set foldlevel=99
-setlocal foldlevel=99
+setlocal foldlevel=98
 setlocal foldmarker={{{,}}}
 set foldmethod=indent
 setlocal foldmethod=indent
@@ -295,7 +296,8 @@ setlocal nopreserveindent
 setlocal nopreviewwindow
 setlocal quoteescape=\\
 setlocal noreadonly
-setlocal norelativenumber
+set relativenumber
+setlocal relativenumber
 setlocal norightleft
 setlocal rightleftcmd=search
 setlocal noscrollbind
@@ -324,12 +326,12 @@ setlocal nowinfixheight
 setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
-let s:l = 217 - ((41 * winheight(0) + 21) / 43)
+let s:l = 59 - ((38 * winheight(0) + 21) / 43)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-217
-normal! 019|
+59
+normal! 0
 tabnext 1
 if exists('s:wipebuf')
   silent exe 'bwipe ' . s:wipebuf
