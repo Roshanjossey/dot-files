@@ -1,5 +1,5 @@
 # Path to your oh-my-zsh installation.
-export ZSH=/home/multunus/.oh-my-zsh
+export ZSH=/home/oogway/.oh-my-zsh
 
 # zsh supporting all colors
 export TERM=xterm-256color
@@ -10,7 +10,7 @@ export TERM=xterm-256color
 # ZSH_THEME="kardan"
 ZSH_THEME="powerlevel9k/powerlevel9k"
 POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(dir)
-POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(longstatus rbenv vcs  time)
+POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status rbenv vcs  time)
 # Advanced `vcs` color customization
 POWERLEVEL9K_VCS_FOREGROUND='black'
 POWERLEVEL9K_VCS_DARK_FOREGROUND='black'
