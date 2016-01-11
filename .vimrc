@@ -39,19 +39,34 @@ Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-fugitive'
 " Using some cool key bindings from vimscript legend Tim Pope
 Plugin 'tpope/vim-unimpaired'
-" That cool status bar I've been seeing
-Plugin 'bling/vim-airline'
-" Vim python-mode. PyLint, Rope, Pydoc, breakpoints from box. 
-Plugin 'klen/python-mode', { 'for': ['python'] }
-" Flake8 plugin for Vim 
-Plugin 'nvie/vim-flake8'
-" Ruby plugin
-Plugin 'vim-ruby/vim-ruby'
 " Extend funtionality of . repeat to plugin functions too
 Plugin 'tpope/vim-repeat'
+" That cool status bar I've been seeing
+Plugin 'bling/vim-airline'
+" undo tree
+Plugin 'sjl/gundo.vim'
+
+" Html css
+" emmet for some cool html wrangling
+Plugin 'mattn/emmet-vim'
+" html5
+Plugin 'othree/html5.vim'
+" css color
+Plugin 'ap/vim-css-color'
+
+" Python
+
+" Vim python-mode. PyLint, Rope, Pydoc, breakpoints from box. 
+Plugin 'klen/python-mode', { 'for': ['python'] }
+" Flake8 plugin for Vim for python 
+Plugin 'nvie/vim-flake8'
 
 " Ruby/Rails
 
+" Ruby plugin
+Plugin 'vim-ruby/vim-ruby'
+" endwise will end things that I start
+Plugin 'tpope/vim-endwise'
 " rails support
 Plugin 'tpope/vim-rails'
 " bundler integration (e.g. :Bopen)
@@ -66,6 +81,16 @@ Plugin 'apidock.vim'
 Plugin 'vim-scripts/blockle.vim'
 " lightweight Rspec runner for Vim
 Plugin 'josemarluedke/vim-rspec'
+
+" Javascript
+
+" support for common js libraries, frameworks
+Plugin 'othree/javascript-libraries-syntax.vim'
+" termination of syntax
+Plugin 'ternjs/tern_for_vim'
+" js syntax, indentaion support
+Plugin 'pangloss/vim-javascript'
+
 " All of your Plugins must be added before the following line
 call vundle#end() 
  
@@ -274,6 +299,8 @@ au FileType go nmap <leader>c <Plug>(go-coverage)
 au FileType go nmap <Leader>gd <Plug>(go-doc)
 au FileType go nmap <Leader>gv <Plug>(go-doc-vertical)
 
+"---------------------------js libraries----------------------------------------
+let g:used_javascript_libs = 'underscore,backbone,jasmine'
 "---------------------------colorscheme----------------------------------------
 
 colorscheme molokai
