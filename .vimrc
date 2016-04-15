@@ -4,7 +4,7 @@ filetype off
 "                              Plugins
 "
 "------------------------------------------------------------------------------
-set rtp+=~/.vim/bundle/vundle/
+set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 " Vundle let's you specify a plugin in a number of formats, but my favorite
 " allows you to grab plugins straight off of github, just specify the bundle
@@ -12,7 +12,7 @@ call vundle#begin()
 " Plugin 'githubUsername/repoName'
  
 " Let vundle manage itself:
-Plugin 'gmarik/vundle'
+Plugin 'VundleVim/Vundle.vim'
 " Syntax checking plugin
 Plugin 'scrooloose/syntastic'
 " File system
@@ -21,10 +21,6 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'flazz/vim-colorschemes'
 " Autocompletion
 Plugin 'Valloric/YouCompleteMe', { 'do': './install.sh' }
-" Snippets engine
-Plugin 'SirVer/ultisnips'
-" Snippets
-Plugin 'honza/vim-snippets'
 " Super tab says it'll take care of all completons using <tab>
 Plugin 'ervandew/supertab'
 " Fuzzy finder -- absolutely must have.
@@ -42,7 +38,9 @@ Plugin 'tpope/vim-unimpaired'
 " Extend funtionality of . repeat to plugin functions too
 Plugin 'tpope/vim-repeat'
 " That cool status bar I've been seeing
-Plugin 'bling/vim-airline'
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
+
 " undo tree
 Plugin 'sjl/gundo.vim'
 
@@ -53,7 +51,6 @@ Plugin 'mattn/emmet-vim'
 Plugin 'othree/html5.vim'
 " css color
 Plugin 'ap/vim-css-color'
-
 " Python
 
 " Vim python-mode. PyLint, Rope, Pydoc, breakpoints from box. 
@@ -80,7 +77,7 @@ Plugin 'apidock.vim'
 " toggle ruby blocks style
 Plugin 'vim-scripts/blockle.vim'
 " lightweight Rspec runner for Vim
-Plugin 'josemarluedke/vim-rspec'
+Plugin 'thoughtbot/vim-rspec'
 
 " Javascript
 
@@ -148,6 +145,8 @@ vnoremap ; :
  
 " So we don't have to reach for escape to leave insert mode.
 inoremap jk <esc>
+" In insert mode, use ao to edit on the line above
+inoremap ao <esc>O
  
 " Use sane regex's when searching
 nnoremap / /\v
@@ -167,13 +166,14 @@ endif
 " Visual line nav, not real line nav
 " If you wrap lines, vim by default won't let you move down one line to the
 " wrapped portion. This fixes that.
-noremap j gj
-noremap k gk
+
+"**************On Splits*****************
 
 " workaround for removing file but not split
 nmap <leader>q :b#<bar>bd#<bar>b<CR>
+" Remove the pipe characters in between splits
+set fillchars+=vert:\ 
 
-"**************On Splits*****************
 " create new vsplit, and switch to it.
 noremap <leader>v <C-w>v
 " create new hsplit, switch to it. 
@@ -218,42 +218,6 @@ au VimLeave * :call MakeSession()
 "------------------------commentary stuff---------------------------------
 " Map the key for toggling comments with vim-commentary
 nnoremap <leader>c <Plug>CommentaryLine
-"------------------------You complete me---------------------------------
-function! g:UltiSnips_Complete()
-    call UltiSnips#ExpandSnippet()
-    if g:ulti_expand_res == 0
-        if pumvisible()
-            return "\<C-n>"
-        else
-            call UltiSnips#JumpForwards()
-            if g:ulti_jump_forwards_res == 0
-                return "\<TAB>"
-            endif
-        endif
-    endif
-    return ""
-endfunction
-
-function! g:UltiSnips_Reverse()
-    call UltiSnips#JumpBackwards()
-    if g:ulti_jump_backwards_res == 0
-        return "\<C-P>"
-    endif
-
-    return ""
-endfunction
-
-
-if !exists("g:UltiSnipsJumpForwardTrigger")
-    let g:UltiSnipsJumpForwardTrigger = "<tab>"
-endif
-
-if !exists("g:UltiSnipsJumpBackwardTrigger")
-    let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
-endif
-
-au InsertEnter * exec "inoremap <silent> " . g:UltiSnipsExpandTrigger . " <C-R>=g:UltiSnips_Complete()<cr>"
-au InsertEnter * exec "inoremap <silent> " . g:UltiSnipsJumpBackwardTrigger . " <C-R>=g:UltiSnips_Reverse()<cr>"
 "-------------------------airline stuff---------------------------------------
 "airline
 set laststatus=2
@@ -286,6 +250,12 @@ let g:ctrlp_max_height = 30
 map <leader>b :CtrlPBuffer<cr>
 " ctrlp -ing mrus 
 map <leader>m :CtrlPMRUFiles<cr>
+"----------------------------- vim-Rspec -------------------------------------
+" RSpec.vim mappings
+au FileType ruby map <Leader>t :call RunCurrentSpecFile()<CR>
+au FileType ruby map <Leader>n :call RunNearestSpec()<CR>
+au FileType ruby map <Leader>l :call RunLastSpec()<CR>
+au FileType ruby map <Leader>a :call RunAllSpecs()<CR>
 "----------------------------vim-go stuff-------------------------------------
 let g:go_highlight_functions = 1
 let g:go_highlight_methods = 1
