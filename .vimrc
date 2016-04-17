@@ -212,6 +212,12 @@ function! LoadSession()
 endfunction
 au VimEnter * nested :call LoadSession()
 au VimLeave * :call MakeSession()
+
+" Function to switch to light colorscheme
+function LetThereBeLight()
+  colorscheme summerfruit256
+  AirlineTheme light
+endfunction
 " ---------------------------------------------------------------------------
 "                           Plugin settings
  
