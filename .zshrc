@@ -95,11 +95,6 @@ export EDITOR='vim'
 # export SSH_KEY_PATH="~/.ssh/dsa_id"
 #
 # google sheets, dashing environment variables
-export GOOGLE_DRIVE_CLIENT_ID=426203972320-nmkbfvh165ranq11benmvd5ahfho5nfh.apps.googleusercontent.com
-
-export GOOGLE_DRIVE_CLIENT_SECRET=Yk0zmsOE7ofXQXMf4l4smTb2
-
-export DASHING_TARGET_SPREAD_SHEET_ID=1EAVXNkEtg84-SxaH1KYkiggTiQh_zpBkwaKQx3_Ss4I
 
 rvm use 2.2.3
 
