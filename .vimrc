@@ -21,6 +21,10 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'flazz/vim-colorschemes'
 " Autocompletion
 Plugin 'Valloric/YouCompleteMe', { 'do': './install.sh' }
+" Snippet engine
+Plugin 'SirVer/ultisnips'
+" Snippets are separated from the engine. Add this if you want them:
+Plugin 'honza/vim-snippets'
 " Super tab says it'll take care of all completons using <tab>
 Plugin 'ervandew/supertab'
 " Fuzzy finder -- absolutely must have.
@@ -106,6 +110,7 @@ set autoindent " Match indents on new lines.
 set smartindent " Intellegently dedent / indent new lines based on rules.
 set number " Turn on line numbers 
 set relativenumber " This provides the current line number and others relatives
+set clipboard=unnamed " provide clipboard
 " set background=dark " background
 set t_Co=256 " 256 color on terminal
 " We have VCS -- we don't need this stuff.
@@ -210,8 +215,9 @@ function! LoadSession()
     echo "No session loaded."
   endif
 endfunction
-au VimEnter * nested :call LoadSession()
 au VimLeave * :call MakeSession()
+
+map <leader>l :call LoadSession()<CR>
 
 " Function to switch to light colorscheme
 function LetThereBeLight()
@@ -220,11 +226,48 @@ function LetThereBeLight()
 endfunction
 " ---------------------------------------------------------------------------
 "                           Plugin settings
- 
+
+"------------------------You complete me---------------------------------
+function! g:UltiSnips_Complete()
+    call UltiSnips#ExpandSnippet()
+    if g:ulti_expand_res == 0
+        if pumvisible()
+            return "\<C-n>"
+        else
+            call UltiSnips#JumpForwards()
+            if g:ulti_jump_forwards_res == 0
+                return "\<TAB>"
+            endif
+        endif
+    endif
+    return ""
+endfunction
+
+function! g:UltiSnips_Reverse()
+    call UltiSnips#JumpBackwards()
+    if g:ulti_jump_backwards_res == 0
+        return "\<C-P>"
+    endif
+
+    return ""
+endfunction
+
+
+if !exists("g:UltiSnipsJumpForwardTrigger")
+    let g:UltiSnipsJumpForwardTrigger = "<tab>"
+endif
+
+if !exists("g:UltiSnipsJumpBackwardTrigger")
+    let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+endif
+
+au InsertEnter * exec "inoremap <silent> " . g:UltiSnipsExpandTrigger . " <C-R>=g:UltiSnips_Complete()<cr>"
+au InsertEnter * exec "inoremap <silent> " . g:UltiSnipsJumpBackwardTrigger . " <C-R>=g:UltiSnips_Reverse()<cr>"
 "------------------------commentary stuff---------------------------------
 " Map the key for toggling comments with vim-commentary
 nnoremap <leader>c <Plug>CommentaryLine
 "-------------------------airline stuff---------------------------------------
+
 "airline
 set laststatus=2
 "airline tabline
