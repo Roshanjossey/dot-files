@@ -110,6 +110,7 @@ set autoindent " Match indents on new lines.
 set smartindent " Intellegently dedent / indent new lines based on rules.
 set number " Turn on line numbers 
 set relativenumber " This provides the current line number and others relatives
+set wildmenu " This provides that command suggestions similar to zshrc
 set clipboard=unnamed " provide clipboard
 " set background=dark " background
 set t_Co=256 " 256 color on terminal
@@ -132,7 +133,10 @@ set gdefault " use the `g` flag by default.
  
 " allow the cursor to go anywhere in visual block mode.
 set virtualedit+=block
- 
+" This is for moving around in wraped lines easily but not mess up numbering
+" when using count
+nnoremap <expr> k (v:count == 0 ? 'gk' : 'k')
+nnoremap <expr> j (v:count == 0 ? 'gj' : 'j')
 " leader is a key that allows you to have your own "namespace" of keybindings.
 " Default is \ but lets use ,
 " Whaterver you see with <leader> in shortcut, ',' in place of <leader>
