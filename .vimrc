@@ -41,6 +41,10 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-unimpaired'
 " Extend funtionality of . repeat to plugin functions too
 Plugin 'tpope/vim-repeat'
+" Guides for indentaion
+Plugin 'nathanaelkane/vim-indent-guides'
+" Let's use ack instead fo grep or :vim
+Plugin 'mileszs/ack.vim'
 " That cool status bar I've been seeing
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
@@ -85,10 +89,6 @@ Plugin 'thoughtbot/vim-rspec'
 
 " Javascript
 
-" support for common js libraries, frameworks
-Plugin 'othree/javascript-libraries-syntax.vim'
-" termination of syntax
-Plugin 'ternjs/tern_for_vim'
 " js syntax, indentaion support
 Plugin 'pangloss/vim-javascript'
 
@@ -130,7 +130,9 @@ set incsearch " live incremental searching
 set showmatch " live match highlighting
 set hlsearch " highlight matches
 set gdefault " use the `g` flag by default.
- 
+
+" Let's only save buffers on saving session
+set sessionoptions=buffers
 " allow the cursor to go anywhere in visual block mode.
 set virtualedit+=block
 " This is for moving around in wraped lines easily but not mess up numbering
@@ -140,7 +142,7 @@ nnoremap <expr> j (v:count == 0 ? 'gj' : 'j')
 " leader is a key that allows you to have your own "namespace" of keybindings.
 " Default is \ but lets use ,
 " Whaterver you see with <leader> in shortcut, ',' in place of <leader>
-let mapleader = ","
+let mapleader = "\ "
 
 "Folding
 set foldmethod=indent
@@ -148,9 +150,11 @@ set foldlevel=99
  
  
 " So we don't have to press shift when we want to get into command mode.
-" This has a perk of inablility to use ; when using f to find
 nnoremap ; :
 vnoremap ; :
+" Also lets use : to find next character when searching with f
+nnoremap : ;
+vnoremap : ;
  
 " So we don't have to reach for escape to leave insert mode.
 inoremap jk <esc>
@@ -162,10 +166,16 @@ nnoremap / /\v
 vnoremap / /\v
  
 " Clear match highlighting
-noremap <leader><space> :noh<cr>:call clearmatches()<cr>
+noremap <leader>g :noh<cr>:call clearmatches()<cr>
  
 " Quick buffer switching - like cmd-tab'ing
 nnoremap <leader><leader> <c-^>
+
+" grep word under cursor
+nnoremap <leader>* :Ack<cr>
+
+" grep word under cursor
+nnoremap <leader>q :ccl<cr>
  
 "Fixing problem of tmux interfering with background
 if exists('$TMUX')
@@ -179,7 +189,7 @@ endif
 "**************On Splits*****************
 
 " workaround for removing file but not split
-nmap <leader>q :b#<bar>bd#<bar>b<CR>
+nnoremap <leader>x :b#<bar>bd#<bar>b<CR>
 " Remove the pipe characters in between splits
 set fillchars+=vert:\ 
 
@@ -221,10 +231,10 @@ function! LoadSession()
 endfunction
 au VimLeave * :call MakeSession()
 
-map <leader>l :call LoadSession()<CR>
+nnoremap <leader>l :call LoadSession()<CR>
 
 " Function to switch to light colorscheme
-function LetThereBeLight()
+function! LetThereBeLight()
   colorscheme summerfruit256
   AirlineTheme light
 endfunction
@@ -303,6 +313,8 @@ let g:ctrlp_max_height = 30
 map <leader>b :CtrlPBuffer<cr>
 " ctrlp -ing mrus 
 map <leader>m :CtrlPMRUFiles<cr>
+" Let's ignore certain folders where we don't wanna search
+let g:ctrlp_custom_ignore = '\v[\/](node_modules|target|dist)|(\.(swp|ico|git|svn))$'
 "----------------------------- vim-Rspec -------------------------------------
 " RSpec.vim mappings
 au FileType ruby map <Leader>t :call RunCurrentSpecFile()<CR>
@@ -322,8 +334,6 @@ au FileType go nmap <leader>c <Plug>(go-coverage)
 au FileType go nmap <Leader>gd <Plug>(go-doc)
 au FileType go nmap <Leader>gv <Plug>(go-doc-vertical)
 
-"---------------------------js libraries----------------------------------------
-let g:used_javascript_libs = 'underscore,backbone,jasmine'
 "---------------------------colorscheme----------------------------------------
 
 colorscheme molokai
