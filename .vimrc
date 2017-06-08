@@ -17,8 +17,8 @@ Plugin 'VundleVim/Vundle.vim'
 Plugin 'scrooloose/syntastic'
 " File system
 Plugin 'scrooloose/nerdtree'
-" Just a shitload of color schemes.
-Plugin 'flazz/vim-colorschemes'
+" Colorscheme 
+Plugin 'lu-ren/SerialExperimentsLain'
 " Autocompletion
 Plugin 'Valloric/YouCompleteMe', { 'do': './install.sh' }
 " Snippet engine
@@ -174,7 +174,7 @@ nnoremap <leader><leader> <c-^>
 " grep word under cursor
 nnoremap <leader>* :Ack<cr>
 
-" grep word under cursor
+" close quickfix
 nnoremap <leader>q :ccl<cr>
  
 "Fixing problem of tmux interfering with background
@@ -287,7 +287,7 @@ set laststatus=2
 "airline tabline
 let g:airline#extensions#tabline#enabled = 1
 "airline theme
-let g:airline_theme="badwolf"
+let g:airline_theme="murmur"
 "airline uses powerline fonts
 let g:airline_powerline_fonts = 1
 "------------------------syntastic stuff--------------------------------------
@@ -336,4 +336,4 @@ au FileType go nmap <Leader>gv <Plug>(go-doc-vertical)
 
 "---------------------------colorscheme----------------------------------------
 
-colorscheme molokai
+colorscheme SerialExperimentsLain

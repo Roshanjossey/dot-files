@@ -3,6 +3,7 @@
 # https://github.com/dbb
 # https://github.com/Mappleconfusers
 # Nicolas Jonas nextgenthemes.com
+# https://github.com/loctauxphilippe
 #
 # Debian, Ubuntu and friends related zsh aliases and functions for zsh
 
@@ -38,6 +39,7 @@ alias agu='sudo apt-get update'   # ad
 alias agud='sudo apt-get update && sudo apt-get dist-upgrade' #adu
 alias agug='sudo apt-get upgrade' # ag
 alias aguu='sudo apt-get update && sudo apt-get upgrade'      #adg
+alias agar='sudo apt-get autoremove'
 
 compdef _ag ag='sudo apt-get'
 compdef _aga aga='sudo apt-get autoclean'
@@ -51,6 +53,7 @@ compdef _agu agu='sudo apt-get update'
 compdef _agud agud='sudo apt-get update && sudo apt-get dist-upgrade'
 compdef _agug agug='sudo apt-get upgrade'
 compdef _aguu aguu='sudo apt-get update && sudo apt-get upgrade'
+compdef _agar agar='sudo apt-get autoremove'
 
 # Remove ALL kernel images and headers EXCEPT the one in use
 alias kclean='sudo aptitude remove -P ?and(~i~nlinux-(ima|hea) \
@@ -58,15 +61,15 @@ alias kclean='sudo aptitude remove -P ?and(~i~nlinux-(ima|hea) \
 
 # Misc. #####################################################################
 # print all installed packages
-alias allpkgs='aptitude search -F "%p" --disable-columns ~i'
+alias allpkgs='dpkg --get-selections | grep -v deinstall'
 
 # Create a basic .deb package
 alias mydeb='time dpkg-buildpackage -rfakeroot -us -uc'
 
 # apt-add-repository with automatic install/upgrade of the desired package
 # Usage: aar ppa:xxxxxx/xxxxxx [packagename]
-# If packagename is not given as 2nd arument the function will ask for it and guess the defaupt by taking
-# the part after the / from the ppa name wich is sometimes the right name for the package you want to install
+# If packagename is not given as 2nd argument the function will ask for it and guess the default by taking
+# the part after the / from the ppa name which is sometimes the right name for the package you want to install
 aar() {
 	if [ -n "$2" ]; then
 		PACKAGE=$2
@@ -105,7 +108,7 @@ apt-history () {
         awk '{print $4"="$5}'
       ;;
     list)
-      zcat $(ls -rt /var/log/dpkg*)
+      zgrep --no-filename '' $(ls -rt /var/log/dpkg*)
       ;;
     *)
       echo "Parameters:"
