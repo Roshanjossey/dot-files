@@ -25,8 +25,6 @@ Plugin 'Valloric/YouCompleteMe', { 'do': './install.sh' }
 Plugin 'SirVer/ultisnips'
 " Snippets are separated from the engine. Add this if you want them:
 Plugin 'honza/vim-snippets'
-" Super tab says it'll take care of all completons using <tab>
-Plugin 'ervandew/supertab'
 " Fuzzy finder -- absolutely must have.
 Plugin 'kien/ctrlp.vim'
 " Go plugin
@@ -66,31 +64,23 @@ Plugin 'klen/python-mode', { 'for': ['python'] }
 " Flake8 plugin for Vim for python 
 Plugin 'nvie/vim-flake8'
 
-" Ruby/Rails
 
 " Ruby plugin
 Plugin 'vim-ruby/vim-ruby'
 " endwise will end things that I start
 Plugin 'tpope/vim-endwise'
-" rails support
-Plugin 'tpope/vim-rails'
-" bundler integration (e.g. :Bopen)
-Plugin 'tpope/vim-bundler'
-" rake integration
-Plugin 'tpope/vim-rake'
-" ruby refactoring
-Plugin 'ecomba/vim-ruby-refactoring'
-" apidock.com docs integration
-Plugin 'apidock.vim'
-" toggle ruby blocks style
-Plugin 'vim-scripts/blockle.vim'
-" lightweight Rspec runner for Vim
-Plugin 'thoughtbot/vim-rspec'
 
 " Javascript
 
 " js syntax, indentaion support
 Plugin 'pangloss/vim-javascript'
+" js intellisence
+Plugin 'ternjs/tern_for_vim'
+" jsx support
+Plugin 'mxw/vim-jsx'
+
+" Some unshamed fun
+Plugin 'johngrib/vim-game-code-break'
 
 " All of your Plugins must be added before the following line
 call vundle#end() 
@@ -130,6 +120,9 @@ set incsearch " live incremental searching
 set showmatch " live match highlighting
 set hlsearch " highlight matches
 set gdefault " use the `g` flag by default.
+
+"Use w!! to save file with root access
+cnoremap w!! w !sudo tee % >/dev/null
 
 " Let's only save buffers on saving session
 set sessionoptions=buffers
@@ -229,7 +222,7 @@ function! LoadSession()
     echo "No session loaded."
   endif
 endfunction
-au VimLeave * :call MakeSession()
+au VimLeave /^\(\(gitcommit\)\@!.\)*$ :call MakeSession()
 
 nnoremap <leader>l :call LoadSession()<CR>
 
@@ -294,14 +287,16 @@ let g:airline_powerline_fonts = 1
 "For removing scratch preview on moving or leaving insert mode
 autocmd CursorMovedI * if pumvisible() == 0|pclose|endif
 autocmd InsertLeave * if pumvisible() == 0|pclose|endif
-let g:syntastic_error_symbol = "✗"
-let g:syntastic_warning_symbol = "⚠"
+let g:syntastic_error_symbol = "❌"
+let g:syntastic_warning_symbol = "⚠️"
 let g:syntastic_always_populate_loc_list = 1 "This will put errors in vim's default thingy
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0 "Don't wanna be bugged when closing right?
 
 let g:syntastic_quiet_messages = { 'regex': '#include.*' }
+
+let g:syntastic_javascript_checkers=['eslint']
 
 "------------------------ctrl p stuff-----------------------------------------
 " Remap ctrlp to ctrl-t -- map it however you like, or stick with the
