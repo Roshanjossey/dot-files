@@ -1,0 +1,8 @@
+alias g='git'
+alias gs='git status'
+alias gst='git stash'
+alias gap='git add -p'
+alias gup='git pull'
+alias gco='git checkout'
+alias gp='git push'
+alias gd='git diff'
