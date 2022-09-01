@@ -1,0 +1,94 @@
+{
+    "schema_version": 2,
+    "timestamp": 1662030130,
+    "workspace": {
+        "0": [
+            [
+                {
+                    "panes": [
+                        {
+                            "type": "dual_v",
+                            "directory": null
+                        },
+                        {
+                            "type": "term",
+                            "directory": "/home/sudobangbang/open/frontend",
+                            "custom_colors": {
+                                "fg_color": null,
+                                "bg_color": null,
+                                "palette": null
+                            }
+                        },
+                        {
+                            "type": "term",
+                            "directory": "/home/sudobangbang/open/frontend",
+                            "custom_colors": {
+                                "fg_color": null,
+                                "bg_color": null,
+                                "palette": null
+                            }
+                        }
+                    ],
+                    "label": "Terminal",
+                    "custom_label_set": false
+                },
+                {
+                    "panes": [
+                        {
+                            "type": "dual_v",
+                            "directory": null
+                        },
+                        {
+                            "type": "term",
+                            "directory": "/home/sudobangbang/open/backend",
+                            "custom_colors": {
+                                "fg_color": null,
+                                "bg_color": null,
+                                "palette": null
+                            }
+                        },
+                        {
+                            "type": "term",
+                            "directory": "/home/sudobangbang/open/dot-files",
+                            "custom_colors": {
+                                "fg_color": null,
+                                "bg_color": null,
+                                "palette": null
+                            }
+                        }
+                    ],
+                    "label": "Terminal",
+                    "custom_label_set": false
+                },
+                {
+                    "panes": [
+                        {
+                            "type": "dual_v",
+                            "directory": null
+                        },
+                        {
+                            "type": "term",
+                            "directory": "/home/sudobangbang/.fonts",
+                            "custom_colors": {
+                                "fg_color": null,
+                                "bg_color": null,
+                                "palette": null
+                            }
+                        },
+                        {
+                            "type": "term",
+                            "directory": "/home/sudobangbang/.fonts",
+                            "custom_colors": {
+                                "fg_color": null,
+                                "bg_color": null,
+                                "palette": null
+                            }
+                        }
+                    ],
+                    "label": "Terminal",
+                    "custom_label_set": false
+                }
+            ]
+        ]
+    }
+}
