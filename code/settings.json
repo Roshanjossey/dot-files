@@ -1,0 +1,92 @@
+{
+  "files.autoSave": "afterDelay",
+  "timeline.showView": true,
+  "editor.minimap.enabled": false,
+  "files.autoSaveDelay": 500,
+  "vim.easymotion": true,
+  "vim.incsearch": true,
+  "vim.useSystemClipboard": true,
+  "vim.useCtrlKeys": true,
+  "vim.hlsearch": true,
+  "vim.insertModeKeyBindings": [
+    {
+      "before": ["j", "k"],
+      "after": ["<Esc>"]
+    }
+  ],
+  "vim.normalModeKeyBindingsNonRecursive": [
+    {
+      "before": ["<leader>", "<leader>"],
+      "commands": [
+        "workbench.action.openPreviousRecentlyUsedEditor",
+        "workbench.action.quickOpenNextRecentlyUsedEditor"
+      ]
+    },
+    {
+      "before": ["<C-n>"],
+      "commands": [":nohl"]
+    }
+  ],
+  "vim.leader": "<space>",
+  "workbench.startupEditor": "newUntitledFile",
+  "typescript.updateImportsOnFileMove.enabled": "always",
+  "breadcrumbs.enabled": false,
+  "editor.renderWhitespace": "none",
+  "workbench.editor.enablePreview": false,
+  "yaml.schemas": {
+    "https://api.jina.ai/schemas/latest.json": ["/*.jina.yml", "/*.jaml"]
+  },
+  "javascript.updateImportsOnFileMove.enabled": "always",
+  "redhat.telemetry.enabled": false,
+  "editor.fontFamily": "'Operator Mono Lig Book', 'Source Code Pro', 'Hack', 'Droid Sans Mono', 'monospace', monospace, 'Droid Sans Fallback'",
+  "editor.fontLigatures": true,
+  "editor.tokenColorCustomizations": {
+    "textMateRules": [
+      {
+        "scope": [
+          //following will be in italic
+          // "comment",
+          "entity.name.type.class", //class names
+          "keyword", //import, export, return…
+          "constant", //String, Number, Boolean…, this, super
+          "storage.modifier", //static keyword
+          "storage.type.class.js" //class keyword
+        ],
+        "settings": {
+          "fontStyle": "italic"
+        }
+      },
+      {
+        "scope": [
+          //following will be excluded from italics (VSCode has some defaults for italics)
+          "invalid",
+          "keyword.operator",
+          "constant.numeric.css",
+          "keyword.other.unit.px.css",
+          "constant.numeric.decimal.js",
+          "constant.numeric.json",
+          "comment.c"
+        ],
+        "settings": {
+          "fontStyle": ""
+        }
+      }
+    ]
+  },
+  "explorer.confirmDragAndDrop": false,
+  "explorer.confirmDelete": false,
+  "workbench.colorTheme": "kaleidoscope",
+  "editor.codeActionsOnSave": null,
+  "git.confirmSync": false,
+  "go.useLanguageServer": false,
+  "editor.inlineSuggest.enabled": true,
+  "github.copilot.advanced": {},
+  "editor.formatOnSave": true,
+  "github.copilot.enable": {
+    "*": true,
+    "yaml": false,
+    "plaintext": true,
+    "markdown": false
+  },
+  "window.zoomLevel": 1
+}
