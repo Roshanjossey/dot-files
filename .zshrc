@@ -30,57 +30,7 @@ export HISTFILE=~/zsh/.zsh_history
 export HISTSIZE=1000
 export SAVEHIST=1000
 
-
-export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nv
-
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
-
-# JINA_CLI_BEGIN
-
-## autocomplete
-if [[ ! -o interactive ]]; then
-    return
-fi
-
-compctl -K _jina jina
-
-_jina() {
-  local words completions
-  read -cA words
-
-  if [ "${#words}" -eq 2 ]; then
-    completions="$(jina commands)"
-  else
-    completions="$(jina completions ${words[2,-2]})"
-  fi
-
-  reply=(${(ps:
-:)completions})
-}
-
-# session-wise fix
-ulimit -n 4096
-export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
-# default workspace for Executors
-export JINA_DEFAULT_WORKSPACE_BASE="${HOME}/.jina/executor-workspace"
-
-# JINA_CLI_END
-
-
-
-
-
-
-
-
-
-
-
-export GOPATH="$HOME/go"
-export PATH="$PATH:$GOPATH/bin"
-
 
 
 
